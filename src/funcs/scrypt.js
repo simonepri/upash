@@ -1,3 +1,5 @@
+'use strict';
+
 const scrypt = require('scrypt');
 const Buffer = require('safe-buffer').Buffer;
 
