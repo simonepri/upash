@@ -4,8 +4,12 @@
   "description": "Easy password hashing and verification in NodeJS",
   "main": "index.js",
   "dependencies": {
+    "argon2": "^0.16.1",
+    "bcrypt": "^1.0.2",
     "lodash": "^4.17.4",
     "require-directory": "^2.1.1",
+    "safe-buffer": "^5.1.1",
+    "scrypt": "^6.0.3",
     "tsse": "^1.0.0"
   },
   "devDependencies": {
