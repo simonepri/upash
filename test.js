@@ -1,7 +1,7 @@
 import test from 'ava';
 import pify from 'pify';
 
-import m from './lib';
+import m from './src';
 
 test.serial('should verify a correct password with pbkdf2', async t => {
   const hash = await pify(m.hash)('hello world');
