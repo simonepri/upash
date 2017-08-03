@@ -1,0 +1,14 @@
+#tests
+test.js
+
+#build tools
+.travis.yml
+codecov.yml
+
+#editor settings
+.editorconfig
+
+#github
+.gitattributes
+.gitignore
+CODE_OF_CONDUCT.md
