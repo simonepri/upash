@@ -18,7 +18,7 @@ const credential = require('credential-plus');
 
 ### hash(password, options, callback)
 
-Adds custom options to errors' body.
+Creates a new 'unique' hash from a password.
 
 #### password
 
@@ -34,16 +34,13 @@ Configurations for the hash function.
 
 ##### func
 
-Type: `string`
+Type: `string`<br>
+Default: `'pbkdf2'`
 
 The name of the hash function to use.
-Can be one of:
-* 'pbkdf2'
-* 'bcrypt'
-* 'scrypt'
-* 'argon2'
+Can be one of: `'pbkdf2'`, `'bcrypt'`, `'scrypt'`,`'argon2'`
 
-Options available are different for each hash function. See [here](#options-2)
+Options available are different for each hash function. See [here](#options-1)
 the list.
 
 #### callback(err, hash)
@@ -69,7 +66,7 @@ verification process.
 
 ### verify(hash, input, callback)
 
-Adds custom options to errors' body.
+Determines whether or not the user's input matches the stored password.
 
 #### hash
 
