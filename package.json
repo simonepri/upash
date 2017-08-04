@@ -10,7 +10,7 @@
     "require-directory": "^2.1.1",
     "safe-buffer": "^5.1.1",
     "scrypt": "^6.0.3",
-    "tsse": "^1.1.0"
+    "tsse": "^1.1.2"
   },
   "devDependencies": {
     "ava": "*",
