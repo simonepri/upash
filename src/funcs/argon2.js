@@ -10,7 +10,7 @@ const _ = require('lodash');
  */
 const defaultConfigs = {
   // The type option is flexible and accepts
-  // 0, 1 or 2 for Argon2d, Argon2i andArgon2id respectively.
+  // 0, 1 or 2 for Argon2d, Argon2i and Argon2id respectively.
   type: 0,
 
   // You can also modify time, memory and parallelism constraints passing the

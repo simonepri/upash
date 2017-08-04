@@ -156,21 +156,23 @@ True if the hash computed for the input matches.
 Type: `number`<br>
 Default: 10000
 
-Description
+The number of `pbkdf2` iterations.
+The number of iterations recommended to ensure data safety changes every year as
+technology improves.
 
 #### keylen
 
 Type: `number`<br>
 Default: 128
 
-Description
+The length of the generated keys.
 
 #### digest
 
 Type: `string`<br>
 Default: 'sha512'
 
-Description
+The digest algorithm. Available options are: `'sha1'`, `'sha256'`, `'sha512'`.
 
 ### bcrypt
 
@@ -179,7 +181,8 @@ Description
 Type: `number`<br>
 Default: 10
 
-Description
+The cost of processing the data.
+See here https://www.npmjs.com/package/bcrypt#a-note-on-rounds
 
 ### scrypt
 
@@ -188,21 +191,24 @@ Description
 Type: `number`<br>
 Default: 0.15
 
-Description
+The maximum amount of time in seconds scrypt will spend when computing the
+derived key.
 
 #### maxmem
 
 Type: `number`<br>
 Default: 0
 
-Description
+The maximum number of bytes of RAM used when computing the derived encryption
+key. If not present, will default to 0.
 
 #### maxmemfrac
 
 Type: `number`<br>
 Default: 0.5
 
-Description
+A double value between 0.0 and 1.0, representing the fraction (normalized
+percentage value) of the available RAM used when computing the derived key.
 
 ### argon2
 
@@ -211,35 +217,37 @@ Description
 Type: `number`<br>
 Default: 0
 
-Description
+The type option is flexible and accepts.
+`0`, `1` or `2` for `Argon2d`, `Argon2i` and `Argon2id` respectively.
 
 #### timeCost
 
 Type: `number`<br>
 Default: 3
 
-Description
+The amount of computation realized and therefore the execution time,
+given in number of iterations.
 
 #### memoryCost
 
 Type: `number`<br>
 Default: 12
 
-Description
+The memory usage, given in kibibytes.
 
 #### parallelism
 
 Type: `number`<br>
 Default: 1
 
-Description
+The number of parallel threads.
 
 #### hashLength
 
 Type: `number`<br>
 Default: 32
 
-Description
+The length of the generated hash.
 
 ## Authors
 * **Simone Primarosa** - [simonepri](https://github.com/simonepri)
