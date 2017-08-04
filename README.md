@@ -2,6 +2,7 @@
 [![Travis CI](https://travis-ci.org/simonepri/credential-plus.svg?branch=master)](https://travis-ci.org/simonepri/credential-plus) [![Codecov](https://img.shields.io/codecov/c/github/simonepri/credential-plus/master.svg)](https://codecov.io/gh/simonepri/credential-plus) [![npm](https://img.shields.io/npm/dm/credential-plus.svg)](https://www.npmjs.com/package/credential-plus) [![npm version](https://img.shields.io/npm/v/credential-plus.svg)](https://www.npmjs.com/package/credential-plus) [![npm dependencies](https://david-dm.org/simonepri/credential-plus.svg)](https://david-dm.org/simonepri/credential-plus) [![npm dev dependencies](https://david-dm.org/simonepri/credential-plus/dev-status.svg)](https://david-dm.org/simonepri/credential-plus#info=devDependencies)
 > 🛡 Easy password hashing and verification in Node. Protects against brute force, rainbow tables, and timing attacks.
 
+Employs cryptographically secure, per password salts to prevent rainbow table attacks. Key stretching is used to make brute force attacks impractical. A constant time verification check prevents variable response time attacks.
 ## Install
 
 ```
@@ -11,7 +12,56 @@ $ npm install --save credential-plus
 ## Usage
 ```js
 const credential = require('credential-plus');
-// Coming soon.
+
+// Hash with pbkdf2 and default config
+credential.hash('We are all unicorns', {func: 'pbkdf2'}, (err, hash) => {
+  console.log(hash);
+  //=> {"hash":"{\"secret\":\"fo3R+bNr2guklSeg1FGoWGIpyrDQ03aPeoTxP90zkVWAISZFIO5S0qQTZtmAAyrmzJFEPdDxK6BX3P3jo+MtG+Fvk5qr+Tfrx2QqemQjrJOLN506SxnqvVs1tlm81QteAgZ5/ZCA55Onv5W9f/EkxgSyrCyqcdkKi/KFXmCRZj4=\",\"salt\":\"6CWbt59QA3jGeQuozB7RhIvRLHtueOu3wLl5eFmU/cCvezPgW0/VuU+estR8HCkgV8CSfP+KM06Sv+ounMBru3zqeuEqbVU+bnRMqbyxJlpD8D0lsytS29LgGNwRx3/UtB7JKsykyR3d4vRW2+2ZLOlcIoc2lnZ5SJXDh8RVkjY=\",\"iterations\":10000,\"keylen\":128,\"digest\":\"sha512\"}","func":"pbkdf2"}
+  credential.verify(hash, 'We are all unicorns', (match) =>{
+    console.log(match);
+    //=> true
+  })
+});
+
+// Hash with bcrypt and default config
+credential.hash('We are all unicorns', {func: 'bcrypt'}, (err, hash) => {
+  console.log(hash);
+  //=> {"hash":"$2a$10$fxxhS75tSP7sP/8UNNJs8uspHSfusSCafU.EhTsn15ENdm/9n3IQe","func":"bcrypt"}
+  credential.verify(hash, 'We are all unicorns', (match) =>{
+    console.log(match);
+    //=> true
+  })
+});
+
+// Hash with scrypt and default config
+credential.hash('We are all unicorns', {func: 'scrypt'}, (err, hash) => {
+  console.log(hash);
+  //=> {"hash":"c2NyeXB0AA8AAAAIAAAAAdZuQumEF/m0V747VleWqvYZKhjOgXgQGtIsgOmLQwwc6KZuU2t1uEkqs9tABwGZyFHdCGkSxzpBLtMgx6UVtKwfcuRGKM2uGu1FvJt8avmU","func":"scrypt"}
+  credential.verify(hash, 'We are all unicorns', (match) =>{
+    console.log(match);
+    //=> true
+  })
+});
+
+// Hash with argon2 and default config
+credential.hash('We are all unicorns', {func: 'argon2'}, (err, hash) => {
+  console.log(hash);
+  //=> {"hash":"$argon2d$v=19$m=4096,t=3,p=1$i5VhaDYfYqSWWoG1uKVBbw$QHpzhFRYJZwIcogtSciXh0hbc8f91PyGBdtWSNocuiE","func":"argon2"}
+  credential.verify(hash, 'We are all unicorns', (match) =>{
+    console.log(match);
+    //=> true
+  })
+});
+
+// Hash with pbkdf2 and custom configs
+credential.hash('We are all unicorns', {func: 'pbkdf2', digest: 'sha1', iterations: 15000}, (err, hash) => {
+  console.log(hash);
+  //=> {"hash":"{\"secret\":\"0SmO6mZB/pGebWX9rBhUDt06hkQ/2yV3Uso6qzyxEdNlXrvo5aX7QuLz9YlQc6iYbKSAO9s2OGi7V0B45TMzkmgQsFK+iFVqkbOlkk8ySyXHVrkISGZoIj9z+VLZ/3jaRCyDzI2dZfoR4IOI3GhYbK/c5jdTPO+YVp2zJHmNHOo=\",\"salt\":\"cxMTjM7yqvIfUoKjjC0nS5DBVXnQllT69DXrS89S2GmzxJrFZ44FCGwbydSQPE7RzzcDUo7C+l3nSh/79LUxWFhQzN7gaFNCKlBvMfSE4qFxU6jyqRTL12/XW1P7FxzE4dPSySXCql5GbryHJSWxofX7GljBKiVd+iYW4cfkUaM=\",\"iterations\":15000,\"keylen\":128,\"digest\":\"sha1\"}","func":"pbkdf2"}
+  credential.verify(hash, 'We are all unicorns', (match) =>{
+    console.log(match);
+    //=> true
+  })
+});
 ```
 
 ## API
