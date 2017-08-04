@@ -1,11 +1,11 @@
 'use strict';
 
-const funcs = require('./funcs');
+const funcs = {};
 
 /**
  * Creates a new 'unique' hash from a password.
  * @param  {string} password The password to hash.
- * @param  {object} [options] Options to configure the hash function.
+ * @param  {object} options Options to configure the hash function.
  * @param  {hashCallback} callback Called after the hash has been computed.
  */
  /**
@@ -16,19 +16,15 @@ const funcs = require('./funcs');
   *   hash funciton needed for the verification process.
   */
 function toHash(password, options, callback) {
-  if (callback === undefined) {
-    callback = options;
-    options = {
-      func: 'pbkdf2'
-    };
+  if (!options || !options.func) {
+    return callback(new Error('You must provide an hash function to use.'));
   }
-
   const hashFunc = funcs[options.func];
 
-  if (typeof password !== 'string' || password.length === 0) {
+  if (!hashFunc) {
+    return callback(new Error(options.func + ' hash function not installed.'));
+  } else if (typeof password !== 'string' || password.length === 0) {
     return callback(new Error('Password must be a non-empty string.'));
-  } else if (!hashFunc) {
-    return callback(new Error('Hash function provided not available.'));
   }
 
   hashFunc.hash(password, options, (err, hash) => {
@@ -63,10 +59,14 @@ function verifyHash(hash, input, callback) {
   } catch (err) {
     return callback(new Error('Couldn\'t parse the provided hash.'));
   }
+  if (typeof hashObj.hash !== 'string' || typeof hashObj.func !== 'string' || hashObj.hash === '' || hashObj.func === '') {
+    return callback(new Error('The provided hash is invalid.'));
+  }
+
   const hashFunc = funcs[hashObj.func];
 
   if (!hashFunc) {
-    return callback(new Error('Hash function used not available.'));
+    return callback(new Error(hashObj.func + ' hash function not installed.'));
   } else if (typeof (input) !== 'string' || input.length === 0) {
     return callback(new Error('Input password must be a non-empty string.'));
   }
@@ -74,7 +74,27 @@ function verifyHash(hash, input, callback) {
   hashFunc.verify(hashObj.hash, input, callback);
 }
 
+/**
+ * Installs an hash function plugin.
+ * @param {object} plugin A plugin compatible with this package.
+ */
+function installPlugin(plugin) {
+  funcs[plugin.name] = {
+    hash: plugin.hash,
+    verify: plugin.verify
+  };
+}
+
+/**
+ * @return {array} The array of the available hash functions.
+ */
+function listPlugins() {
+  return Object.keys(funcs);
+}
+
 module.exports = {
   verify: verifyHash,
-  hash: toHash
+  hash: toHash,
+  install: installPlugin,
+  plugins: listPlugins
 };
