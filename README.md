@@ -13,7 +13,7 @@ $ npm install --save credential-plus
 ```js
 const credential = require('credential-plus');
 
-// Hash with pbkdf2 and default configs
+// Hash and verify with pbkdf2 and default configs
 credential.hash('We are all unicorns', {func: 'pbkdf2'}, (err, hash) => {
   console.log(hash);
   //=> {"hash":"{\"secret\":\"fo3R+bNr2guklSeg1FGoWGIpyrDQ03aPeoTxP90zkVWAISZFIO5S0qQTZtmAAyrmzJFEPdDxK6BX3P3jo+MtG+Fvk5qr+Tfrx2QqemQjrJOLN506SxnqvVs1tlm81QteAgZ5/ZCA55Onv5W9f/EkxgSyrCyqcdkKi/KFXmCRZj4=\",\"salt\":\"6CWbt59QA3jGeQuozB7RhIvRLHtueOu3wLl5eFmU/cCvezPgW0/VuU+estR8HCkgV8CSfP+KM06Sv+ounMBru3zqeuEqbVU+bnRMqbyxJlpD8D0lsytS29LgGNwRx3/UtB7JKsykyR3d4vRW2+2ZLOlcIoc2lnZ5SJXDh8RVkjY=\",\"iterations\":10000,\"keylen\":128,\"digest\":\"sha512\"}","func":"pbkdf2"}
@@ -23,7 +23,7 @@ credential.hash('We are all unicorns', {func: 'pbkdf2'}, (err, hash) => {
   })
 });
 
-// Hash with bcrypt and default configs
+// Hash and verify with bcrypt and default configs
 credential.hash('We are all unicorns', {func: 'bcrypt'}, (err, hash) => {
   console.log(hash);
   //=> {"hash":"$2a$10$fxxhS75tSP7sP/8UNNJs8uspHSfusSCafU.EhTsn15ENdm/9n3IQe","func":"bcrypt"}
@@ -33,7 +33,7 @@ credential.hash('We are all unicorns', {func: 'bcrypt'}, (err, hash) => {
   })
 });
 
-// Hash with scrypt and default configs
+// Hash and verify with scrypt and default configs
 credential.hash('We are all unicorns', {func: 'scrypt'}, (err, hash) => {
   console.log(hash);
   //=> {"hash":"c2NyeXB0AA8AAAAIAAAAAdZuQumEF/m0V747VleWqvYZKhjOgXgQGtIsgOmLQwwc6KZuU2t1uEkqs9tABwGZyFHdCGkSxzpBLtMgx6UVtKwfcuRGKM2uGu1FvJt8avmU","func":"scrypt"}
@@ -43,7 +43,7 @@ credential.hash('We are all unicorns', {func: 'scrypt'}, (err, hash) => {
   })
 });
 
-// Hash with argon2 and default configs
+// Hash and verify with argon2 and default configs
 credential.hash('We are all unicorns', {func: 'argon2'}, (err, hash) => {
   console.log(hash);
   //=> {"hash":"$argon2d$v=19$m=4096,t=3,p=1$i5VhaDYfYqSWWoG1uKVBbw$QHpzhFRYJZwIcogtSciXh0hbc8f91PyGBdtWSNocuiE","func":"argon2"}
@@ -53,7 +53,7 @@ credential.hash('We are all unicorns', {func: 'argon2'}, (err, hash) => {
   })
 });
 
-// Hash with pbkdf2 and custom configs
+// Hash and verify with pbkdf2 and custom configs
 credential.hash('We are all unicorns', {func: 'pbkdf2', digest: 'sha1', iterations: 15000}, (err, hash) => {
   console.log(hash);
   //=> {"hash":"{\"secret\":\"0SmO6mZB/pGebWX9rBhUDt06hkQ/2yV3Uso6qzyxEdNlXrvo5aX7QuLz9YlQc6iYbKSAO9s2OGi7V0B45TMzkmgQsFK+iFVqkbOlkk8ySyXHVrkISGZoIj9z+VLZ/3jaRCyDzI2dZfoR4IOI3GhYbK/c5jdTPO+YVp2zJHmNHOo=\",\"salt\":\"cxMTjM7yqvIfUoKjjC0nS5DBVXnQllT69DXrS89S2GmzxJrFZ44FCGwbydSQPE7RzzcDUo7C+l3nSh/79LUxWFhQzN7gaFNCKlBvMfSE4qFxU6jyqRTL12/XW1P7FxzE4dPSySXCql5GbryHJSWxofX7GljBKiVd+iYW4cfkUaM=\",\"iterations\":15000,\"keylen\":128,\"digest\":\"sha1\"}","func":"pbkdf2"}
