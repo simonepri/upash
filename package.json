@@ -2,7 +2,7 @@
   "name": "credential-plus",
   "version": "0.6.0",
   "description": "Easy password hashing and verification in NodeJS",
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
     "argon2": "^0.16.1",
     "bcrypt": "^1.0.2",
@@ -41,6 +41,7 @@
     "passwords",
     "hashing",
     "verification",
+    "hash function",
     "hash",
     "auth",
     "authorization",
