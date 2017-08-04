@@ -2,6 +2,9 @@
 [![Travis CI](https://travis-ci.org/simonepri/credential-plus.svg?branch=master)](https://travis-ci.org/simonepri/credential-plus) [![Codecov](https://img.shields.io/codecov/c/github/simonepri/credential-plus/master.svg)](https://codecov.io/gh/simonepri/credential-plus) [![npm](https://img.shields.io/npm/dm/credential-plus.svg)](https://www.npmjs.com/package/credential-plus) [![npm version](https://img.shields.io/npm/v/credential-plus.svg)](https://www.npmjs.com/package/credential-plus) [![npm dependencies](https://david-dm.org/simonepri/credential-plus.svg)](https://david-dm.org/simonepri/credential-plus) [![npm dev dependencies](https://david-dm.org/simonepri/credential-plus/dev-status.svg)](https://david-dm.org/simonepri/credential-plus#info=devDependencies)
 > 🛡 Easy password hashing and verification in Node. Protects against brute force, rainbow tables, and timing attacks.
 
+More advanced version of the awesome [credential](https://github.com/ericelliott/credential) package.
+If you find a security flaw in this code, please [report it](issues/new).
+
 ## Install
 
 ```
