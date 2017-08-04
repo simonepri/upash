@@ -52,29 +52,29 @@ test.serial('should not verify a wrong password with argon2', async t => {
 });
 
 test.serial('undefined or empty password with scrypt', async t => {
-  let err = await pify(m.hash)(undefined, {func: 'scrypt'});
+  let err = await t.throws(pify(m.hash)(undefined, {func: 'scrypt'}));
   t.true(err instanceof Error);
-  err = await pify(m.hash)('', {func: 'scrypt'});
+  err = await t.throws(pify(m.hash)('', {func: 'scrypt'}));
   t.true(err instanceof Error);
 });
 
 test.serial('undefined or empty password with pbkdf2', async t => {
-  let err = await pify(m.hash)(undefined, {func: 'pbkdf2'});
+  let err = await t.throws(pify(m.hash)(undefined, {func: 'pbkdf2'}));
   t.true(err instanceof Error);
-  err = await pify(m.hash)('', {func: 'pbkdf2'});
+  err = await t.throws(pify(m.hash)('', {func: 'pbkdf2'}));
   t.true(err instanceof Error);
 });
 
 test.serial('undefined or empty password with argon2', async t => {
-  let err = await pify(m.hash)(undefined, {func: 'argon2'});
+  let err = await t.throws(pify(m.hash)(undefined, {func: 'argon2'}));
   t.true(err instanceof Error);
-  err = await pify(m.hash)('', {func: 'argon2'});
+  err = await t.throws(pify(m.hash)('', {func: 'argon2'}));
   t.true(err instanceof Error);
 });
 
 test.serial('undefined or empty password with bcrypt', async t => {
-  let err = await pify(m.hash)(undefined, {func: 'bcrypt'});
+  let err = await t.throws(pify(m.hash)(undefined, {func: 'bcrypt'}));
   t.true(err instanceof Error);
-  err = await pify(m.hash)('', {func: 'bcrypt'});
+  err = await t.throws(pify(m.hash)('', {func: 'bcrypt'}));
   t.true(err instanceof Error);
 });
