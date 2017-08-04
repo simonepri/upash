@@ -52,31 +52,28 @@ test.serial('should not verify a wrong password with argon2', async t => {
 });
 
 test.serial('the time of processing with round 2 is less than round 10 with bcrypt', async t => {
-  const date = new Date();
-  const mill1 = date.now();
+  const mill1 = Date.now();
   await pify(m.hash)('Hello world', {func: 'bcrypt', rounds: 2});
-  const mill2 = date.now();
+  const mill2 = Date.now();
   await pify(m.hash)('Hello world', {func: 'bcrypt', rounds: 10});
-  const mill3 = date.now();
+  const mill3 = Date.now();
   t.true(mill2 - mill1 < mill3 - mill2);
 });
 
 test.serial('the time of processing with maxtime 0.15 is less than maxtime 0.20 with scrypt', async t => {
-  const date = new Date();
-  const mill1 = date.now();
+  const mill1 = Date.now();
   await pify(m.hash)('Hello world', {func: 'scrypt', maxtime: 0.15});
-  const mill2 = date.now();
+  const mill2 = Date.now();
   await pify(m.hash)('Hello world', {func: 'scrypt', maxtime: 0.20});
-  const mill3 = date.now();
+  const mill3 = Date.now();
   t.true(mill2 - mill1 < mill3 - mill2);
 });
 
 test.serial('the time of processing with timeCost 3 is less than timeCost 5 with argon2', async t => {
-  const date = new Date();
-  const mill1 = date.now();
+  const mill1 = Date.now();
   await pify(m.hash)('Hello world', {func: 'argon2', timeCost: 3});
-  const mill2 = date.now();
+  const mill2 = Date.now();
   await pify(m.hash)('Hello world', {func: 'argon2', timeCost: 5});
-  const mill3 = date.now();
+  const mill3 = Date.now();
   t.true(mill2 - mill1 < mill3 - mill2);
 });
