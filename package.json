@@ -1,6 +1,6 @@
 {
   "name": "credential-plus",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Easy password hashing and verification in NodeJS",
   "main": "src/index.js",
   "dependencies": {
