@@ -8,7 +8,16 @@ codecov.yml
 #editor settings
 .editorconfig
 
+#npm
+.npmignore
+package-lock.json
+npm-shrinkwrap.json
+
 #github
 .gitattributes
 .gitignore
 CODE_OF_CONDUCT.md
+
+# nyc test coverage
+coverage
+.nyc_output
