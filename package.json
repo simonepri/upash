@@ -1,7 +1,7 @@
 {
   "name": "credential-plus",
   "version": "2.0.2",
-  "description": "Password hashin and verification made easy!",
+  "description": "Password hashing and verification made easy!",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
