@@ -47,6 +47,9 @@ bcrypt | [credential-plus-bcrypt](https://github.com/simonepri/credential-plus-b
 scrypt | [credential-plus-scrypt](https://github.com/simonepri/credential-plus-scrypt)
 argon2 | [credential-plus-argon2](https://github.com/simonepri/credential-plus-argon2)
 
+Currently the most vetted hashing algorithm providing most security is BCrypt.
+PBKDF2 isn't bad either, but if you can use BCrypt you should.
+
 In the next section we will use `pbkdf2` for examples, replace it with your choice if differs.
 
 ```bash
