@@ -153,9 +153,9 @@ Installs an hash function hashFunction.
 | --- | --- | --- |
 | hashFunction | <code>object</code> | An hash function compatible with this package. |
 
-<a name="listFunctions"></a>
+<a name="list"></a>
 
-## listFunctions() ⇒ <code>array</code>
+## list() ⇒ <code>array</code>
 **Kind**: global function
 **Returns**: <code>array</code> - The array of the available hash functions.
 **Access**: public
