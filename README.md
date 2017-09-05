@@ -27,7 +27,7 @@
 $ npm install --save credential-plus
 ```
 
-# Plugins
+## Plugins
 
 In order to use this package you need at least one plugin. (aka hash function)
 You can chose one ore more of those plugins:
