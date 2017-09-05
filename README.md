@@ -9,7 +9,7 @@
   <a href="https://www.npmjs.com/package/credential-plus"><img src="https://img.shields.io/npm/dm/credential-plus.svg" alt="npm downloads" /></a>
   <a href="https://david-dm.org/simonepri/credential-plus"><img src="https://david-dm.org/simonepri/credential-plus.svg" alt="dependencies" /></a>
   <a href="https://david-dm.org/simonepri/credential-plus#info=devDependencies"><img src="https://david-dm.org/simonepri/credential-plus/dev-status.svg" alt="dev dependencies" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/simonepri/credential-plus-bcrypt.svg" alt="license" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/simonepri/credential-plus.svg" alt="license" /></a>
 </div>
 <br />
 <div align="center">
