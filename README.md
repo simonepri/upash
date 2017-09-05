@@ -21,8 +21,14 @@
   </sub>
 </div>
 
-## Intro
+## Background
 
+Over the past several years, we've seen major breaches exposing numerous
+usernames and passwords. With every password breach comes the inevitable
+question: Were the passwords stored securely?
+
+This package aim to provide secure, well configured and ready to use password
+hashing algorithms for your application.
 
 ## Install
 
@@ -38,8 +44,8 @@ Hash function name | Package to install
 -------------------|-------------------
 pbkdf2 | [credential-plus-pbkdf2](https://github.com/simonepri/credential-plus-pbkdf2)
 bcrypt | [credential-plus-bcrypt](https://github.com/simonepri/credential-plus-bcrypt)
-scrypt |  [credential-plus-scrypt](https://github.com/simonepri/credential-plus-scrypt)
-argon2 |  [credential-plus-argon2](https://github.com/simonepri/credential-plus-argon2)
+scrypt | [credential-plus-scrypt](https://github.com/simonepri/credential-plus-scrypt)
+argon2 | [credential-plus-argon2](https://github.com/simonepri/credential-plus-argon2)
 
 In the next section we will use `pbkdf2` for examples, replace it with your choice if differs.
 
@@ -106,10 +112,10 @@ You can find more detailed usage examples in the ***usage*** section of each plu
 ## hash(password, options) ⇒ <code>Promise.&lt;string&gt;</code>
 Creates a new 'unique' hash from a password.
 
-**Kind**: global function
+**Kind**: global function  
 **Returns**: <code>Promise.&lt;string&gt;</code> - A promise that contains a stringified object
  that holds the generated hash string, the name of the function used to hash
- it.
+ it.  
 **Access**: public
 
 | Param | Type | Description |
@@ -131,9 +137,9 @@ See the ***API*** section of the plugin you choose for more details:
 ## verify(hash, input) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Determines whether or not the user's input matches the stored password.
 
-**Kind**: global function
+**Kind**: global function  
 **Returns**: <code>Promise.&lt;boolean&gt;</code> - A promise that contains a boolean that is true if
-  if the hash computed for the input matches.
+  if the hash computed for the input matches.  
 **Access**: public
 
 | Param | Type | Description |
@@ -146,7 +152,7 @@ Determines whether or not the user's input matches the stored password.
 ## install(hashFunction)
 Installs an hash function hashFunction.
 
-**Kind**: global function
+**Kind**: global function  
 **Access**: public
 
 | Param | Type | Description |
@@ -156,8 +162,8 @@ Installs an hash function hashFunction.
 <a name="list"></a>
 
 ## list() ⇒ <code>array</code>
-**Kind**: global function
-**Returns**: <code>array</code> - The array of the available hash functions.
+**Kind**: global function  
+**Returns**: <code>array</code> - The array of the available hash functions.  
 **Access**: public
 
 ## Authors
