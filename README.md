@@ -1,6 +1,25 @@
-# credential-plus
-[![Travis CI](https://travis-ci.org/simonepri/credential-plus.svg?branch=master)](https://travis-ci.org/simonepri/credential-plus) [![Codecov](https://img.shields.io/codecov/c/github/simonepri/credential-plus/master.svg)](https://codecov.io/gh/simonepri/credential-plus) [![npm](https://img.shields.io/npm/dm/credential-plus.svg)](https://www.npmjs.com/package/credential-plus) [![npm version](https://img.shields.io/npm/v/credential-plus.svg)](https://www.npmjs.com/package/credential-plus) [![npm dependencies](https://david-dm.org/simonepri/credential-plus.svg)](https://david-dm.org/simonepri/credential-plus) [![npm dev dependencies](https://david-dm.org/simonepri/credential-plus/dev-status.svg)](https://david-dm.org/simonepri/credential-plus#info=devDependencies)
-> 🛡 Easy password hashing and verification in Node. Protects against brute force, rainbow tables, and timing attacks.
+<h1 align="center">
+  <img src="./media/credential-plus.png" alt="credential-plus" />
+</h1>
+<div align="center">
+  <a href="https://travis-ci.org/simonepri/credential-plus"> <img src="https://travis-ci.org/simonepri/credential-plus.svg?branch=master" alt="build status"></a>
+  <a href="https://codecov.io/gh/simonepri/credential-plus"><img src="https://img.shields.io/codecov/c/github/simonepri/credential-plus/master.svg" alt="code coverage" /></a>
+  <a href="https://github.com/sindresorhus/xo"><img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg" alt="code style" /></a>
+  <a href="https://www.npmjs.com/package/credential-plus"><img src="https://img.shields.io/npm/v/credential-plus.svg" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/credential-plus"><img src="https://img.shields.io/npm/dm/credential-plus.svg" alt="npm downloads" /></a>
+  <a href="https://david-dm.org/simonepri/credential-plus"><img src="https://david-dm.org/simonepri/credential-plus.svg" alt="dependencies" /></a>
+  <a href="https://david-dm.org/simonepri/credential-plus#info=devDependencies"><img src="https://david-dm.org/simonepri/credential-plus/dev-status.svg" alt="dev dependencies" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/simonepri/credential-plus-bcrypt.svg" alt="license" /></a>
+</div>
+<br />
+<div align="center">
+  🛡 Easy password hashing and verification in Node.
+</div>
+<div align="center">
+  <sub>
+    Protects against brute force, rainbow tables, and timing attacks.
+  </sub>
+</div>
 
 ## Install
 
