@@ -21,151 +21,144 @@
   </sub>
 </div>
 
+## Intro
+
+
 ## Install
 
-```
+```bash
 $ npm install --save credential-plus
 ```
 
-## Plugins
+## Hash functions
+This package is build with modularity in mind and supports multiple hash functions.
+In order to use this package you need to pick at least one of them from this list:
 
-In order to use this package you need at least one plugin. (aka hash function)
-You can chose one ore more of those plugins:
+Hash function name | Package to install
+-------------------|-------------------
+pbkdf2 | [credential-plus-pbkdf2](https://github.com/simonepri/credential-plus-pbkdf2)
+bcrypt | [credential-plus-bcrypt](https://github.com/simonepri/credential-plus-bcrypt)
+scrypt |  [credential-plus-scrypt](https://github.com/simonepri/credential-plus-scrypt)
+argon2 |  [credential-plus-argon2](https://github.com/simonepri/credential-plus-argon2)
 
-* [credential-plus-pbkdf2](https://github.com/simonepri/credential-plus-pbkdf2)
-* [credential-plus-bcrypt](https://github.com/simonepri/credential-plus-bcrypt)
-* [credential-plus-scrypt](https://github.com/simonepri/credential-plus-scrypt)
-* [credential-plus-argon2](https://github.com/simonepri/credential-plus-argon2)
+In the next section we will use `pbkdf2` for examples, replace it with your choice if differs.
 
-If you create your own plugin, please open a PR and add it to this list.
+```bash
+$ npm install --save credential-plus-pbkdf2
+```
 
 ## Usage
-Lets call `X` the plugin package of your choice.
-
 ```js
 const credential = require('credential-plus');
 
 // Installs the plugin. Replace 'X' with your choice.
-credential.install(require('credential-plus-X'));
+credential.install(require('credential-plus-pbkdf2'));
 
 // Hash and verify with default configs.
-credential.hash('We are all humans', {func: 'X'}, (err, hash) => {
-  console.log(hash);
-  //=> '{"hash":"generated hash", "func":"X"}'
-  credential.verify(hash, 'We are all humans', (match) =>{
-    console.log(match);
-    //=> true
-  })
-  credential.verify(hash, 'We are all unicorns', (match) =>{
-    console.log(match);
-    //=> false
-  })
-});
+credential.hash('We are all humans', {func: 'pbkdf2'})
+  .then(hash) => {
+
+    console.log(hash);
+    //=> '{"hash":"generated hash", "func":"pbkdf2"}'
+
+    credential.verify(hash, 'We are all humans')
+      .then(match) => {
+        console.log(match);
+        //=> true
+      });
+
+    credential.verify(hash, 'We are all unicorns')
+      .then(match) => {
+        console.log(match);
+        //=> false
+      });
+
+  });
 ```
 
-You can find more detailed usage in the ***usage*** section of each plugin:
+You can find more detailed usage examples in the ***usage*** section of each plugin:
 
 * [pbkdf2](https://github.com/simonepri/credential-plus-pbkdf2#usage)
 * [bcrypt](https://github.com/simonepri/credential-plus-bcrypt#usage)
 * [scrypt](https://github.com/simonepri/credential-plus-scrypt#usage)
 * [argon2](https://github.com/simonepri/credential-plus-argon2#usage)
 
+## API TOC
+
+<dl>
+<dt><a href="#hash">hash(password, options)</a> ⇒ <code>Promise.&lt;string&gt;</code></dt>
+<dd><p>Creates a new &#39;unique&#39; hash from a password.</p>
+</dd>
+<dt><a href="#verify">verify(hash, input)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dd><p>Determines whether or not the user&#39;s input matches the stored password.</p>
+</dd>
+<dt><a href="#install">install(hashFunction)</a></dt>
+<dd><p>Installs an hash function hashFunction.</p>
+</dd>
+<dt><a href="#list">list()</a> ⇒ <code>array</code></dt>
+<dd></dd>
+</dl>
+
 ## API
 
-### hash(password, options, callback)
+<a name="hash"></a>
 
+## hash(password, options) ⇒ <code>Promise.&lt;string&gt;</code>
 Creates a new 'unique' hash from a password.
 
-#### password
+**Kind**: global function
+**Returns**: <code>Promise.&lt;string&gt;</code> - A promise that contains a stringified object
+ that holds the generated hash string, the name of the function used to hash
+ it.
+**Access**: public
 
-Type: `string`
-
-The password to hash.
-
-#### options
-
-Type: `object`
-
-Configurations for the hash function.
-
-##### func
-
-Type: `string`<br>
-
-The name of the plugin (hash function) to use.
-This is the only option field required.
+| Param | Type | Description |
+| --- | --- | --- |
+| password | <code>string</code> | The password to hash. |
+| options | <code>object</code> | Options to configure the hash function. |
+| options.func | <code>string</code> | The name of the hash function to use. |
 
 Options available are different for each hash function.<br>
-See the API section of the plugin you choose for more details:
+See the ***API*** section of the plugin you choose for more details:
 
 * [pbkdf2](https://github.com/simonepri/credential-plus-pbkdf2#options)
 * [bcrypt](https://github.com/simonepri/credential-plus-bcrypt#options)
 * [scrypt](https://github.com/simonepri/credential-plus-scrypt#options)
 * [argon2](https://github.com/simonepri/credential-plus-argon2#options)
 
-#### callback(err, hash)
+<a name="verify"></a>
 
-Type: `function`
-
-Called after the hash has been computed.
-
-#### err
-
-Type: `object`
-
-Possible error thrown.
-
-#### hash
-
-Type: `object`
-
-The generated hash.
-
-### verify(hash, input, callback)
-
+## verify(hash, input) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Determines whether or not the user's input matches the stored password.
 
-#### hash
+**Kind**: global function
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - A promise that contains a boolean that is true if
+  if the hash computed for the input matches.
+**Access**: public
 
-Type: `string`
+| Param | Type | Description |
+| --- | --- | --- |
+| hash | <code>string</code> | Stringified hash object generated from this package. |
+| input | <code>string</code> | User's password input. |
 
-An hash generated from this package.
+<a name="install"></a>
 
-#### input
+## install(hashFunction)
+Installs an hash function hashFunction.
 
-Type: `string`
+**Kind**: global function
+**Access**: public
 
-User's input input.
+| Param | Type | Description |
+| --- | --- | --- |
+| hashFunction | <code>object</code> | An hash function compatible with this package. |
 
-#### callback(err, valid)
+<a name="listFunctions"></a>
 
-Type: `string`
-
-Called after the verification process has been computed.
-
-#### err
-
-Type: `object`
-
-Possible error thrown.
-
-##### valid
-
-Type: `boolean`
-
-True if the hash computed for the input matches.
-
-### install(plugin)
-
-Installs an hash function plugin.
-
-#### plugin
-
-A plugin compatible with this package.
-
-### plugins()
-
-Returns the array of the installed plugins (hash functions).
+## listFunctions() ⇒ <code>array</code>
+**Kind**: global function
+**Returns**: <code>array</code> - The array of the available hash functions.
+**Access**: public
 
 ## Authors
 * **Simone Primarosa** - [simonepri](https://github.com/simonepri)
