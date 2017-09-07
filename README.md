@@ -106,7 +106,7 @@ This [wiki](https://github.com/simonepri/credential-plus/wiki/Migration) page ai
 <dt><a href="#verify">verify(hash, input)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
 <dd><p>Determines whether or not the user&#39;s input matches the stored password.</p>
 </dd>
-<dt><a href="#install">install(hashFunction)</a></dt>
+<dt><a href="#installf">install(hashFunction)</a></dt>
 <dd><p>Installs an hash function hashFunction.</p>
 </dd>
 <dt><a href="#list">list()</a> ⇒ <code>array</code></dt>
@@ -155,7 +155,7 @@ Determines whether or not the user's input matches the stored password.
 | hash | <code>string</code> | Stringified hash object generated from this package. |
 | input | <code>string</code> | User's password input. |
 
-<a name="install"></a>
+<a name="installf"></a>
 
 ## install(hashFunction)
 Installs an hash function hashFunction.
