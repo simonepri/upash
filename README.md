@@ -92,6 +92,11 @@ You can find more detailed usage examples in the ***usage*** section of each plu
 * [scrypt](https://github.com/simonepri/credential-plus-scrypt#usage)
 * [argon2](https://github.com/simonepri/credential-plus-argon2#usage)
 
+## Migration
+If your not building a new application, possibilities that you have already
+implemented some hash/verify logic for your passwords are high.
+This [wiki](https://github.com/simonepri/credential-plus/wiki/Migration) page aim to help you migrating to this package.
+
 ## API TOC
 
 <dl>
