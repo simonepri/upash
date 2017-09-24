@@ -60,7 +60,7 @@ $ npm install --save credential-plus-pbkdf2
 ```js
 const credential = require('credential-plus');
 
-// Installs the plugin. Replace 'X' with your choice.
+// Installs the plugin.
 credential.install(require('credential-plus-pbkdf2'));
 
 // Hash and verify with default configs.
