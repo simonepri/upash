@@ -2,6 +2,7 @@
   <a href="https://github.com/simonepri/credential-plus"><img src="./media/credential-plus.png" alt="credential-plus" /></a>
 </h1>
 <div align="center">
+  <a href="https://github.com/sindresorhus/awesome-nodejs"><img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome NodeJS" /></a>
   <a href="https://travis-ci.org/simonepri/credential-plus"> <img src="https://travis-ci.org/simonepri/credential-plus.svg?branch=master" alt="build status"></a>
   <a href="https://codecov.io/gh/simonepri/credential-plus"><img src="https://img.shields.io/codecov/c/github/simonepri/credential-plus/master.svg" alt="code coverage" /></a>
   <a href="https://github.com/sindresorhus/xo"><img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg" alt="code style" /></a>
