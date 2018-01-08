@@ -24,6 +24,8 @@
 
 ## Background
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/simonepri/credential-plus.svg)](https://greenkeeper.io/)
+
 Over the past several years, we've seen major breaches exposing numerous
 usernames and passwords. With every password breach comes the inevitable
 question: Were the passwords stored securely?
