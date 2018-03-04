@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="https://github.com/simonepri/upash/raw/upash/media/upash.png" alt="upash" width="600"/>
+  <a href="https://github.com/simonepri/upash">
+    <img src="https://github.com/simonepri/upash/raw/upash/media/upash.png" alt="upash" width="600"/>
+  </a>
 </p>
 <p align="center">
   <!-- Mentioned - Awesome NodeJS -->
