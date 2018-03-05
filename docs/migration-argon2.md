@@ -15,10 +15,10 @@ const argon2 = require('argon2');
 /* HASH */
 // `timeCost`, `memoryCost` and `parallelism` are optional numeric parameters
 const hash = await argon2.hash('password', {timeCost, memoryCost, parallelism});
-// save hash to the db
+// save `hash` to the db
 
 /* VERIFY */
-// read hash from the db
+// read `hash` from the db
 const match = await argon2.verify(hash, 'password');
 ```
 

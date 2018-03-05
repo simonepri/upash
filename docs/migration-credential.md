@@ -16,7 +16,7 @@ const credential = require('credential')();
 /* HASH */
 // `iterations`, `keylen` and `digest` are optional parameters
 const hash = await pify(credential.hash)(password);
-// save hash to the db
+// save `hash` to the db
 
 /* VERIFY */
 // read `hash` from the db
