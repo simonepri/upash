@@ -166,6 +166,21 @@ For installation and usage information about the CLI, see the [@upash/cli][cli]
 page.
 <br/><br/>
 
+
+## Related
+- [@upash/universal][universal] -
+🔒 Easy to use Unified API for all password hashing algorithms.
+- [@upash/cli][cli] -
+🔒 Easy to use CLI for all password hashing algorithms.
+- [@upash/argon2][argon2] -
+🔒 Easy to use Unified API for Argon2 password hashing algorithm.
+- [@upash/scrypt][scrypt] -
+🔒 Easy to use Unified API for scrypt password hashing algorithm.
+- [@upash/bcrypt][bcrypt] -
+🔒 Easy to use Unified API for bcrypt password hashing algorithm.
+- [@upash/pbkdf2][pbkdf2] -
+🔒 Easy to use Unified API for pbkdf2-crypt password hashing algorithm.
+
 ## Contributing
 Contributions are REALLY welcome and if you find a security flaw in this code,
 PLEASE [report it][new issue].  
