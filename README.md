@@ -22,6 +22,12 @@
   </sub>
 </div>
 
+<hr/>
+<p align="center">
+  <strong>DEPRECATED!!! USE <a href="https://github.com/simonepri/upash">upash</a> INSTEAD</strong>
+</p>
+<hr/>
+
 ## Background
 
 Over the past several years, we've seen major breaches exposing numerous
