@@ -25,8 +25,8 @@
 
 ## Synopsis
 <img src="https://github.com/simonepri/upash/raw/upash/media/api.png" alt="upash api" width="400" align="right"/>
-The upash project provides you a Unified API to implement secured and well
-configured password hashing algorithms inside your application.
+The upash project provides you a Unified API to implement secured and
+well-configured password hashing algorithms inside your application.
 
 #### Highlights
 - Single API for all password hashing algorithms
@@ -34,7 +34,7 @@ configured password hashing algorithms inside your application.
 - CLI available
 
 Do you believe that this is *useful*?
-It has *saved you time*?
+Has it *saved you time*?
 Or maybe you simply *like it*?  
 If so, [show your appreciation with a Star ⭐️][start].
 
@@ -42,7 +42,7 @@ If so, [show your appreciation with a Star ⭐️][start].
 Media covers the theft of large collections of passwords on an almost daily
 basis. Media coverage of password theft discloses the password storage scheme,
 the weakness of that scheme, and often discloses a large population of
-compromised credentials that can affect multiple web sites or other applications.
+compromised credentials that can affect multiple websites or other applications.
 
 Proper storage helps prevent theft, compromise, and malicious use of credentials.
 Information systems store passwords and other credentials in a variety of
@@ -84,7 +84,7 @@ improves.
   license.
 </sub>
 
-## Functions
+## Functions available
 You can choose from one of the following functions to securely store your
 credentials.
 - [@upash/argon2][argon2] - is the winner of the
@@ -98,7 +98,7 @@ support isn't. [[specs]][specs:scrypt]
 
 ## Suggested usage
 You can choose to use directly one of the functions listed before, but our
-advise is to use them through the [@upash/universal][universal] package.
+advice is to use them through the [@upash/universal][universal] package.
 
 In that way, in the eventuality that you will ever need to change the hashing
 algorithm of your choice in the future, you can do it without any additional
@@ -122,9 +122,9 @@ const match = await upash.verify(hinfo.func, hinfo.hash, 'Super Secret Password'
 ```
 
 ## Migrating your existing password hashing solution
-If your not building a new application, possibilities that you have already
-implemented some hash/verify logic for your passwords are high.
-The following articles provides some good guidance on how to accomplish an
+If you're not building a new application, chances are high that you have
+already implemented some hash/verify logic for your passwords.
+The following documentation provide some good guidance on how to accomplish an
 upgrade in place without adversely affecting existing user accounts and future
 proofing your upgrade so you can seamlessly upgrade again
 (which you eventually will need to do).
@@ -136,11 +136,14 @@ proofing your upgrade so you can seamlessly upgrade again
 - Migrating from [npm:bcrypt][docs:migration-bcrypt]
 - Migrating from [other libraries][docs:migration-others]
 
+Please if you don't find a migration documentation that fits your case,
+[open an issue][new issue].
+
 ## Upgrading your password hashing algorithm
 If you are using the [@upash/universal][universal] package, upgrading to a new
 hashing algorithm is straight-forward.  
 
-Lets assume that your `registration` and `login` logic looks like this:
+Let's assume that your `registration` and `login` logic looks like this:
 
 ```js
 const upash = require('@upash/universal');
@@ -149,20 +152,20 @@ upash.install('pbkdf2', require('@upash/pbkdf2'));
 async function registration(email, password) {
   const hash = upash.hash('pbkdf2', password);
   const hinfo = {func: 'pbkdf2', hash: hash};
-  const upash = JSON.stringify(hinfo);
-  // db.users.new({email: email, upash: upash});
+  const phash = JSON.stringify(hinfo);
+  // db.users.new({email: email, phash: phash});
 }
 
 async function login(email, password) {
   // const user = db.users.find({email: email});
-  const hinfo = JSON.parse(user.upash);
+  const hinfo = JSON.parse(user.phash);
   const match = upash.verify(hinfo.func, hinfo.hash);
   // do something with the match variable
 }
 ```
 
 And that you want to change `pbkdf2` to `argon2`.  
-Then you just need to change your code to:
+What you need to do, is just change your code to:
 
 ```js
 const upash = require('@upash/universal');
@@ -172,18 +175,20 @@ upash.install('argon2', require('@upash/argon2'));
 async function registration(email, password) {
   const hash = upash.hash('argon2', password);
   const hinfo = {func: 'argon2', hash: hash};
-  // db.users.new({email: email, hinfo: JSON.stringify(hinfo)});
+  const phash = JSON.stringify(hinfo);
+  // db.users.new({email: email, phash: phash});
 }
 
 async function login(email, password) {
   // const user = db.users.find({email: email});
-  let hinfo = JSON.parse(user.hinfo);
+  let hinfo = JSON.parse(user.phash);
   const match = upash.verify(hinfo.func, hinfo.hash);
 
   if (match && hinfo.func !== 'argon2') {
     const hash = upash.hash('argon2', password);
     hinfo = {func: 'argon2', hash: hash};
-    // db.users.update({email: email, hinfo: JSON.stringify(hinfo)});
+    const phash = JSON.stringify(hinfo);
+    // db.users.update({email: email, phash: phash});
   }
   // do something with the match variable
 }

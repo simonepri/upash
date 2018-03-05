@@ -14,15 +14,15 @@ const scrypt = require('scrypt');
 const Buffer = require('safe-buffer').Buffer;
 
 /* HASH */
-// maxtime, maxmem and maxmemfrac are optional numeric parameters
+// `maxtime`, `maxmem` and `maxmemfrac` are optional numeric parameters
 const hash = await = scrypt
   .params(maxtime, maxmem, maxmemfrac)
   .then(params => scrypt.kdf(password, params))
   .then(hash => hash.toString('base64'));
-// save hash to the db
+// save `hash` to the db
 
 /* VERIFY */
-// read hash from the db
+// read `hash` from the db
 const match = await scrypt.verifyKdf(Buffer.from(hash, 'base64'), Buffer.from(password));
 ```
 
@@ -31,12 +31,12 @@ Into this:
 const scrypt = require('@upash/scrypt');
 
 /* HASH */
-// maxtime, maxmem and maxmemfrac are an optional numeric parameters
+// `maxtime`, `maxmem` and `maxmemfrac` are an optional numeric parameters
 const hash = await scrypt.hash('password', {maxtime, maxmem, maxmemfrac});
-// save hash to the db
+// save `hash` to the db
 
 /* VERIFY */
-// read hash from the db
+// read `hash` from the db
 const match = await scrypt.verify(hash, 'password');
 ```
 
@@ -46,22 +46,22 @@ const upash = require('@upash/universal');
 upash.install('scrypt', require('@upash/scrypt'));
 
 /* HASH */
-// maxtime, maxmem and maxmemfrac are an optional numeric parameters
+// `maxtime`, `maxmem` and `maxmemfrac` are an optional numeric parameters
 const hash = await upash.hash('scrypt', 'password', {maxtime, maxmem, maxmemfrac});
 const hinfo = {func: 'scrypt', hash: hash};
-const hinfostr = JSON.stringify(hinfo);
-// save hinfostr to the db
+const phash = JSON.stringify(hinfo);
+// save phash to the db
 
 /* VERIFY */
-// read new hinfostr and old hash from the db
+// read new `phash` and old `hash` from the db
 let hinfo;
-if (hinfostr) {
-  hinfo = JSON.parse(hinfostr);
+if (phash) {
+  hinfo = JSON.parse(phash);
 } else {
   // convert passwords hashed before the migration into the new format
-  hinfo = {func: 'scrypt', hash: hinfostr};
-  hinfostr = JSON.stringify(hinfo);
-  // update hinfostr into the db
+  hinfo = {func: 'scrypt', hash: phash};
+  phash = JSON.stringify(hinfo);
+  // update `phash` into the db
 }
 const match = await upash.verify(hinfo.func, hinfo.hash, password);
 ```

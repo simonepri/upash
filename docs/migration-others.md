@@ -29,12 +29,12 @@ upash.install('custom', {
 });
 
 /* HASH */
-// options is an optional object to pass to your custom hash function
+// `options` is an optional object to pass to your custom hash function
 const hash = await upash.hash('custom', 'password', options);
-// save hash to the db
+// save `hash` to the db
 
 /* VERIFY */
-// read hash from the db
+// read `hash` from the db
 const match = await upash.verify('custom', hash, 'password');
 ```
 
@@ -47,22 +47,22 @@ upash.install('custom', {
 });
 
 /* HASH */
-// options is an optional object to pass to your custom hash function
+// `options` is an optional object to pass to your custom hash function
 const hash = await upash.hash('custom', 'password', options);
 const hinfo = {func: 'custom', hash: hash};
-const hinfostr = JSON.stringify(hinfo);
-// save hinfostr to the db
+const phash = JSON.stringify(hinfo);
+// save phash to the db
 
 /* VERIFY */
-// read new hinfostr and old hash from the db
+// read new `phash` and old `hash` from the db
 let hinfo;
-if (hinfostr) {
-  hinfo = JSON.parse(hinfostr);
+if (phash) {
+  hinfo = JSON.parse(phash);
 } else {
   // convert passwords hashed before the migration into the new format
   hinfo = {func: 'custom', hash: hash};
-  hinfostr = JSON.stringify(hinfo);
-  // update hinfostr into the db
+  phash = JSON.stringify(hinfo);
+  // update `phash` into the db
 }
 const match = await upash.verify(hinfo.func, hinfo.hash, password);
 ```

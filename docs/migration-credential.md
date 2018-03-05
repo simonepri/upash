@@ -14,12 +14,12 @@ const pify = require('pify');
 const credential = require('credential')();
 
 /* HASH */
-// iterations, keylen and digest are optional parameters
+// `iterations`, `keylen` and `digest` are optional parameters
 const hash = await pify(credential.hash)(password);
 // save hash to the db
 
 /* VERIFY */
-// read hash from the db
+// read `hash` from the db
 const match = await pify(credential.verify)(hash, password);
 ```
 
@@ -28,17 +28,17 @@ Into this:
 const pbkdf2 = require('@upash/pbkdf2');
 
 /* HASH */
-// timeCost, memoryCost and parallelism are optional numeric parameters
+// `timeCost`, `memoryCost` and `parallelism` are optional numeric parameters
 const hash = await pbkdf2.hash('password', {timeCost, memoryCost, parallelism});
-// save hash to the db
+// save `hash` to the db
 
 /* VERIFY */
-// read hash from the db
+// read `hash` from the db
 try {
   // convert passwords hashed before the migration into the new format
   const hdata = JSON.parse(hash);
   hash = [hdata.hash, hdata.salt, hdata.iterations, hdata.keyLength, 'sha1'].join(',');
-  // update hash into the db
+  // update `hash` into the db
 } catch (err) {}
 const match = await pbkdf2.verify(hash, 'password');
 ```
@@ -48,17 +48,17 @@ Or, if you want to use [@upash/universal][universal], into this:
 const upash = require('@upash/universal');
 upash.install('pbkdf2', require('@upash/pbkdf2'));
 
-// iterations, keylen and digest are optional parameters
+// `iterations`, `keylen` and `digest` are optional parameters
 const hash = await upash.hash('pbkdf2', password, {iterations, keylen, digest});
 const hinfo = {func: 'pbkdf2', hash: hash};
-const hinfostr = JSON.stringify(hinfo);
-// save hinfostr to the db
+const phash = JSON.stringify(hinfo);
+// save `phash` to the db
 
 /* VERIFY */
-// read the new hinfostr or the old hash from the db
+// read the new `phash` or the old `hash` from the db
 const hinfo;
-if (hinfostr) {
-  hinfo = JSON.parse(hinfostr);
+if (phash) {
+  hinfo = JSON.parse(phash);
 } else {
   // convert passwords hashed before the migration into the new format
   const hdata = JSON.parse(hash);
@@ -66,8 +66,8 @@ if (hinfostr) {
     func: 'pbkdf2',
     hash: [hdata.hash, hdata.salt, hdata.iterations, hdata.keyLength, 'sha1'].join(',')
   };
-  hinfostr = JSON.stringify(hinfo);
-  // update hinfostr into the db
+  phash = JSON.stringify(hinfo);
+  // update `phash` into the db
 } catch (err) {}
 const match = await upash.verify(hinfo.func, hinfo.hash, password);
 ```

@@ -12,8 +12,13 @@ Just change this:
 ```js
 const bcrypt = require('bcrypt');
 
-// rounds is an optional numeric parameter
+/* HASH */
+// `rounds` is an optional numeric parameter
 const hash = await bcrypt.genSalt(rounds).then(salt => bcrypt.hash(password, salt));
+// save `hash` to db
+
+/* VERIFY */
+// read `hash` from the db
 const match = await bcrypt.compare('password', hash);
 ```
 
@@ -21,8 +26,13 @@ Into this:
 ```js
 const bcrypt = require('@upash/bcrypt');
 
-// rounds is an optional numeric parameter
+/* HASH */
+// `rounds` is an optional numeric parameter
 const hash = await bcrypt.hash('password', {rounds});
+// save `hash` to db
+
+/* VERIFY */
+// read `hash` from the db
 const match = await bcrypt.verify(hash, 'password');
 ```
 
@@ -32,22 +42,22 @@ const upash = require('@upash/universal');
 upash.install('bcrypt', require('@upash/bcrypt'));
 
 /* HASH */
-// rounds is an optional numeric parameter
+// `rounds` is an optional numeric parameter
 const hash = await upash.hash('bcrypt', 'password', {rounds});
 const hinfo = {func: 'bcrypt', hash: hash};
-const hinfostr = JSON.stringify(hinfo);
-// save hinfostr to db
+const phash = JSON.stringify(hinfo);
+// save `phash` to db
 
 /* VERIFY */
-// read new hinfostr and old hash from the db
+// read new `phash` and old `hash` from the db
 let hinfo;
-if (hinfostr) {
-  hinfo = JSON.parse(hinfostr);
+if (phash) {
+  hinfo = JSON.parse(phash);
 } else {
   // convert passwords hashed before the migration into the new format
   hinfo = {func: 'bcrypt', hash: hash};
-  hinfostr = JSON.stringify(hinfo);
-  // update hinfostr into the db
+  phash = JSON.stringify(hinfo);
+  // update `phash` into the db
 }
 const match = await upash.verify(hinfo.func, hinfo.hash, password);
 ```

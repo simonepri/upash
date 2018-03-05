@@ -13,7 +13,7 @@ Just change this:
 const argon2 = require('argon2');
 
 /* HASH */
-// timeCost, memoryCost and parallelism are optional numeric parameters
+// `timeCost`, `memoryCost` and `parallelism` are optional numeric parameters
 const hash = await argon2.hash('password', {timeCost, memoryCost, parallelism});
 // save hash to the db
 
@@ -27,12 +27,12 @@ Into this:
 const argon2 = require('@upash/argon2');
 
 /* HASH */
-// timeCost, memoryCost and parallelism are optional numeric parameters
+// `timeCost`, `memoryCost` and `parallelism` are optional numeric parameters
 const hash = await argon2.hash('password', {timeCost, memoryCost, parallelism});
-// save hash to the db
+// save `hash` to the db
 
 /* VERIFY */
-// read hash from the db
+// read `hash` from the db
 const match = await argon2.verify(hash, 'password');
 ```
 
@@ -42,22 +42,22 @@ const upash = require('@upash/universal');
 upash.install('argon2', require('@upash/argon2'));
 
 /* HASH */
-// timeCost, memoryCost and parallelism are optional numeric parameters
+// `timeCost`, `memoryCost` and `parallelism` are optional numeric parameters
 const hash = await upash.hash('argon2', 'password', {timeCost, memoryCost, parallelism});
 const hinfo = {func: 'argon2', hash: hash};
-const hinfostr = JSON.stringify(hinfo);
-// save hinfostr to the db
+const phash = JSON.stringify(hinfo);
+// save `phash` to the db
 
 /* VERIFY */
-// read new hinfostr and old hash from the db
+// read new `phash` and old `hash` from the db
 let hinfo;
-if (hinfostr) {
-  hinfo = JSON.parse(hinfostr);
+if (phash) {
+  hinfo = JSON.parse(phash);
 } else {
   // convert passwords hashed before the migration into the new format
   hinfo = {func: 'argon2', hash: hash};
-  hinfostr = JSON.stringify(hinfo);
-  // update hinfostr into the db
+  phash = JSON.stringify(hinfo);
+  // update `phash` into the db
 }
 const match = await upash.verify(hinfo.func, hinfo.hash, password);
 ```

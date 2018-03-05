@@ -16,13 +16,13 @@ const credential = require('credential-plus');
 credential.install(require('credential-plus-argon2'));
 
 /* HASH */
-// timeCost, memoryCost and parallelism are optional numeric parameters
-const hinfostr = await credential.hash(password, {func: 'argon2', timeCost, memoryCost, parallelism});
-// save hinfostr to the db
+// `timeCost`, `memoryCost` and `parallelism` are optional numeric parameters
+const phash = await credential.hash(password, {func: 'argon2', timeCost, memoryCost, parallelism});
+// save `phash` to the db
 
 /* VERIFY */
-// read hinfostr from the db
-const match = await credential.verify(hinfostr, password);
+// read `phash` from the db
+const match = await credential.verify(phash, password);
 ```
 
 Into this:
@@ -31,15 +31,15 @@ const upash = require('@upash/universal');
 upash.install('argon2', require('@upash/argon2'));
 
 /* HASH */
-// timeCost, memoryCost and parallelism are optional numeric parameters
+// `timeCost`, `memoryCost` and `parallelism` are optional numeric parameters
 const hash = await upash.hash('argon2', password, {timeCost, memoryCost, parallelism});
 const hinfo = {func: 'argon2', hash: hash};
-const hinfostr = JSON.stringify(hinfo);
-// save hinfostr to the db
+const phash = JSON.stringify(hinfo);
+// save `phash` to the db
 
 /* VERIFY */
-// read hinfostr from the db
-const hinfo = JSON.parse(hinfostr);
+// read `phash` from the db
+const hinfo = JSON.parse(phash);
 const match = await upash.verify(hinfo.func, hinfo.hash, password);
 ```
 
@@ -50,13 +50,13 @@ const credential = require('credential-plus');
 credential.install(require('credential-plus-scrypt'));
 
 /* HASH */
-// maxtime, maxmem and maxmemfrac are optional numeric parameters
-const hinfostr = await credential.hash(password, {func: 'scrypt', maxtime, maxmem, maxmemfrac});
-// save hinfostr to the db
+// `maxtime`, `maxmem` and `maxmemfrac` are optional numeric parameters
+const phash = await credential.hash(password, {func: 'scrypt', maxtime, maxmem, maxmemfrac});
+// save `phash` to the db
 
 /* VERIFY */
-// read hinfostr from the db
-const match = await credential.verify(hinfostr, password);
+// read `phash` from the db
+const match = await credential.verify(phash, password);
 ```
 
 Into this:
@@ -65,15 +65,15 @@ const upash = require('@upash/universal');
 upash.install('scrypt', require('@upash/scrypt'));
 
 /* HASH */
-// maxtime, maxmem and maxmemfrac are optional numeric parameters
+// `maxtime`, `maxmem` and `maxmemfrac` are optional numeric parameters
 const hash = await upash.hash('scrypt', password, {maxtime, maxmem, maxmemfrac});
 const hinfo = {func: 'scrypt', hash: hash};
-const hinfostr = JSON.stringify(hinfo);
-// save hinfostr to the db
+const phash = JSON.stringify(hinfo);
+// save `phash` to the db
 
 /* VERIFY */
-// read hinfostr from the db
-const hinfo = JSON.parse(hinfostr);
+// read `phash` from the db
+const hinfo = JSON.parse(phash);
 const match = await upash.verify(hinfo.func, hinfo.hash, password);
 ```
 
@@ -84,13 +84,13 @@ const credential = require('credential-plus');
 credential.install(require('credential-plus-bcrypt'));
 
 /* HASH */
-// rounds is an optional numeric parameter
-const hinfostr = await credential.hash(password, {func: 'bcrypt', rounds});
-// save hinfostr to the db
+// `rounds` is an optional numeric parameter
+const phash = await credential.hash(password, {func: 'bcrypt', rounds});
+// save `phash` to the db
 
 /* VERIFY */
-// read hinfostr from the db
-const match = await credential.verify(hinfostr, password);
+// read `phash` from the db
+const match = await credential.verify(phash, password);
 ```
 
 Into this:
@@ -99,15 +99,15 @@ const upash = require('@upash/universal');
 upash.install('bcrypt', require('@upash/bcrypt'));
 
 /* HASH */
-// rounds is an optional numeric parameter
+// `rounds` is an optional numeric parameter
 const hash = await upash.hash('bcrypt', password, {rounds});
 const hinfo = {func: 'bcrypt', hash: hash};
-const hinfostr = JSON.stringify(hinfo);
-// save hinfostr to the db
+const phash = JSON.stringify(hinfo);
+// save `phash` to the db
 
 /* VERIFY */
-// read hinfostr from the db
-const hinfo = JSON.parse(hinfostr);
+// read `phash` from the db
+const hinfo = JSON.parse(phash);
 const match = await upash.verify(hinfo.func, hinfo.hash, password);
 ```
 
@@ -118,13 +118,13 @@ const credential = require('credential-plus');
 credential.install(require('credential-plus-pbkdf2'));
 
 /* HASH */
-// iterations, keylen and digest are optional parameters
-const hinfostr = await credential.hash(password, {func: 'pbkdf2', iterations, keylen, digest});
-// save hinfostr to the db
+// `iterations`, `keylen` and `digest` are optional parameters
+const phash = await credential.hash(password, {func: 'pbkdf2', iterations, keylen, digest});
+// save `phash` to the db
 
 /* VERIFY */
-// read hinfostr from the db
-const match = await credential.verify(hinfostr, password);
+// read `phash` from the db
+const match = await credential.verify(phash, password);
 ```
 
 Into this:
@@ -132,21 +132,21 @@ Into this:
 const upash = require('@upash/universal');
 upash.install('pbkdf2', require('@upash/pbkdf2'));
 
-// iterations, keylen and digest are optional parameters
+// `iterations`, `keylen` and `digest` are optional parameters
 const hash = await upash.hash('pbkdf2', password, {iterations, keylen, digest});
 const hinfo = {func: 'pbkdf2', hash: hash};
-const hinfostr = JSON.stringify(hinfo);
-// save hinfostr to the db
+const phash = JSON.stringify(hinfo);
+// save `phash` to the db
 
 /* VERIFY */
-// read the new hinfostr or the old hinfostr from the db
-const hinfo = JSON.parse(hinfostr);
+// read the new `phash` or the old `phash` from the db
+const hinfo = JSON.parse(phash);
 try {
   // convert passwords hashed before the migration into the new format
   const hdata = JSON.parse(hinfo.hash);
   hinfo.hash = [hdata.secret, hdata.salt, hdata.iterations, hdata.keylen, hdata.digest].join(',');
-  hinfostr = JSON.stringify(hinfo);
-  // update hinfostr into the db
+  phash = JSON.stringify(hinfo);
+  // update `phash` into the db
 } catch (err) {}
 const match = await upash.verify(hinfo.func, hinfo.hash, password);
 ```
