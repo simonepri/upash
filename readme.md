@@ -195,7 +195,7 @@ This project is licensed under the MIT License - see the [license][license] file
 [argon2]: https://github.com/simonepri/upash-argon2
 [scrypt]: https://github.com/simonepri/upash-scrypt
 [bcrypt]: https://github.com/simonepri/upash-bcrypt
-[pbkdf2]: https://github.com/simonepri/upash-pbkdf2d
+[pbkdf2]: https://github.com/simonepri/upash-pbkdf2
 
 [github:simonepri]: https://github.com/simonepri
 [twitter:simonepri]: http://twitter.com/intent/user?screen_name=simoneprimarosa
