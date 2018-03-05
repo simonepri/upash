@@ -30,7 +30,7 @@ well-configured password hashing algorithms inside your application.
 
 #### Highlights
 - Single API for all password hashing algorithms
-- Always up to date secure default work, memory and parallelism parameters
+- Always up to date secure default configurations
 - CLI available
 
 Do you believe that this is *useful*?
