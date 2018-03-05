@@ -25,8 +25,10 @@
 
 ## Synopsis
 <img src="https://github.com/simonepri/upash/raw/master/media/api.png" alt="upash api" width="400" align="right"/>
-The upash ([pronounced u-pash][upash:pronounce]) project provides you a **U**nified API to implement secured and
-well-configured **p**assword h**ash**ing algorithms inside your application.
+
+The upash ([pronounced u-pash][upash:pronounce]) project provides you a
+**U**nified API to implement secured and well-configured **p**assword
+h**ash**ing algorithms inside your application.
 
 #### Highlights
 - Single API for all password hashing algorithms
