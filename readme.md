@@ -24,7 +24,7 @@
 </p>
 
 ## Synopsis
-<img src="https://github.com/simonepri/upash-cli/raw/upash/media/api.png" alt="upash api" width="400" align="right"/>
+<img src="https://github.com/simonepri/upash/raw/upash/media/api.png" alt="upash api" width="400" align="right"/>
 The upash project provides you a Unified API to implement secured and well
 configured password hashing algorithms inside your application.
 
@@ -190,7 +190,7 @@ async function login(email, password) {
 ```
 
 ## CLI
-<img src="https://github.com/simonepri/upash-cli/raw/master/media/preview.gif" alt="upash cli" width="400" align="right"/>
+<img src="https://github.com/simonepri/upash/raw/upash/media/cli.gif" alt="upash cli" width="400" align="right"/>
 
 The idea behind this project is to make Password Hashing Algorithms as
 accessible as possible.  
