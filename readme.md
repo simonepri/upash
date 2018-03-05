@@ -87,10 +87,10 @@ improves.
 ## Functions available
 You can choose from one of the following functions to securely store your
 credentials.
-- [@upash/argon2][argon2] - is the winner of the
+- [@upash/argon2][argon2]: is the winner of the
 [password hashing competition][argon2:password-competition] and should be
 considered as your first choice for new applications. [[specs]][specs:argon2]
-- [@upash/pbkdf2][pbkdf2] - when FIPS certification or enterprise support on many platforms is
+- [@upash/pbkdf2][pbkdf2]: when FIPS certification or enterprise support on many platforms is
 required. [[specs]][specs:pbkdf2]
 - [@upash/scrypt][scrypt]: where resisting any/all hardware accelerated attacks is necessary but
 support isn't. [[specs]][specs:scrypt]
