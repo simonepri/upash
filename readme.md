@@ -25,8 +25,8 @@
 
 ## Synopsis
 <img src="https://github.com/simonepri/upash/raw/master/media/api.png" alt="upash api" width="400" align="right"/>
-The upash project provides you a Unified API to implement secured and
-well-configured password hashing algorithms inside your application.
+The upash ([pronounced u-pash][upash:pronounce]) project provides you a **U**nified API to implement secured and
+well-configured **p**assword h**ash**ing algorithms inside your application.
 
 #### Highlights
 - Single API for all password hashing algorithms
@@ -216,6 +216,7 @@ This project is licensed under the MIT License - see the [license][license] file
 [twitter:simonepri]: http://twitter.com/intent/user?screen_name=simoneprimarosa
 
 [argon2:password-competition]: https://password-hashing.net/
+[upash:pronounce]: https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=u-pash
 
 [specs:argon2]: https://password-hashing.net/argon2-specs.pdf
 [specs:pbkdf2]: http://www.ietf.org/rfc/rfc2898.txt
