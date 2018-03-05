@@ -129,70 +129,27 @@ upgrade in place without adversely affecting existing user accounts and future
 proofing your upgrade so you can seamlessly upgrade again
 (which you eventually will need to do).
 
-- Migrating from [npm:credential-plus][docs:migration-credential-plus]
-- Migrating from [npm:credential][docs:migration-credential]
-- Migrating from [npm:argon2][docs:migration-argon2]
-- Migrating from [npm:scrypt][docs:migration-scrypt]
-- Migrating from [npm:bcrypt][docs:migration-bcrypt]
+- Migrating from [credential-plus][docs:migration-credential-plus]
+- Migrating from [credential][docs:migration-credential]
+- Migrating from [argon2][docs:migration-argon2]
+- Migrating from [scrypt][docs:migration-scrypt]
+- Migrating from [bcrypt][docs:migration-bcrypt]
 - Migrating from [other libraries][docs:migration-others]
 
 Please if you don't find a migration documentation that fits your case,
 [open an issue][new issue].
 
 ## Upgrading your password hashing algorithm
-If you are using the [@upash/universal][universal] package, upgrading to a new
-hashing algorithm is straight-forward.  
+Upgrading the hashing algorithm used to hash passwords inside your application
+can be a really painful operation if not done well.
+You should take a lot of attention in order to not adversely affect existing
+user accounts  
 
-Let's assume that your `registration` and `login` logic looks like this:
+[This article](https://veggiespam.com/painless-password-hash-upgrades/) is a
+nice start that should give you some ideas on what are the problems related to
+that process.  
 
-```js
-const upash = require('@upash/universal');
-upash.install('pbkdf2', require('@upash/pbkdf2'));
-
-async function registration(email, password) {
-  const hash = upash.hash('pbkdf2', password);
-  const hinfo = {func: 'pbkdf2', hash: hash};
-  const phash = JSON.stringify(hinfo);
-  // db.users.new({email: email, phash: phash});
-}
-
-async function login(email, password) {
-  // const user = db.users.find({email: email});
-  const hinfo = JSON.parse(user.phash);
-  const match = upash.verify(hinfo.func, hinfo.hash);
-  // do something with the match variable
-}
-```
-
-And that you want to change `pbkdf2` to `argon2`.  
-What you need to do, is just change your code to:
-
-```js
-const upash = require('@upash/universal');
-upash.install('pbkdf2', require('@upash/pbkdf2'));
-upash.install('argon2', require('@upash/argon2'));
-
-async function registration(email, password) {
-  const hash = upash.hash('argon2', password);
-  const hinfo = {func: 'argon2', hash: hash};
-  const phash = JSON.stringify(hinfo);
-  // db.users.new({email: email, phash: phash});
-}
-
-async function login(email, password) {
-  // const user = db.users.find({email: email});
-  let hinfo = JSON.parse(user.phash);
-  const match = upash.verify(hinfo.func, hinfo.hash);
-
-  if (match && hinfo.func !== 'argon2') {
-    const hash = upash.hash('argon2', password);
-    hinfo = {func: 'argon2', hash: hash};
-    const phash = JSON.stringify(hinfo);
-    // db.users.update({email: email, phash: phash});
-  }
-  // do something with the match variable
-}
-```
+Example of implementations can be found in the [dedicated documentation page][docs:upgrade-algorithm].
 
 ## CLI
 <img src="https://github.com/simonepri/upash/raw/upash/media/cli.gif" alt="upash cli" width="400" align="right"/>
@@ -256,3 +213,4 @@ This project is licensed under the MIT License - see the [license][license] file
 [docs:migration-scrypt]: https://github.com/simonepri/upash/tree/master/docs/migration-scrypt.md
 [docs:migration-bcrypt]: https://github.com/simonepri/upash/tree/master/docs/migration-bcrypt.md
 [docs:migration-others]: https://github.com/simonepri/upash/tree/master/docs/migration-others.md
+[docs:upgrade-algorithm]: https://github.com/simonepri/upash/tree/master/docs/upgrade-algorithm.md
