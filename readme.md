@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/simonepri/upash">
-    <img src="https://github.com/simonepri/upash/raw/upash/media/upash.png" alt="upash" width="600"/>
+    <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="600"/>
   </a>
 </p>
 <p align="center">
@@ -24,7 +24,7 @@
 </p>
 
 ## Synopsis
-<img src="https://github.com/simonepri/upash/raw/upash/media/api.png" alt="upash api" width="400" align="right"/>
+<img src="https://github.com/simonepri/upash/raw/master/media/api.png" alt="upash api" width="400" align="right"/>
 The upash project provides you a Unified API to implement secured and
 well-configured password hashing algorithms inside your application.
 
@@ -152,7 +152,7 @@ that process.
 Example of implementations can be found in the [dedicated documentation page][docs:upgrade-algorithm].
 
 ## CLI
-<img src="https://github.com/simonepri/upash/raw/upash/media/cli.gif" alt="upash cli" width="400" align="right"/>
+<img src="https://github.com/simonepri/upash/raw/master/media/cli.gif" alt="upash cli" width="400" align="right"/>
 
 The idea behind this project is to make Password Hashing Algorithms as
 accessible as possible.  
