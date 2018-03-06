@@ -3,12 +3,23 @@
     <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="600"/>
   </a>
 </p>
+<p align="center">
+  <!-- Mentioned - Awesome NodeJS -->
+  <a href="https://github.com/sindresorhus/awesome-nodejs#security">
+    <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome NodeJS" />
+  </a>
+  <!-- License - MIT -->
+  <a href="https://github.com/simonepri/upash/tree/master/license">
+    <img src="https://img.shields.io/github/license/simonepri/upash.svg" alt="Project license" />
+  </a>
+</p>
 
 ## Migration from `bcrypt` package
 If your are using the [bcrypt][npm:bcrypt] package, the migration to
 [upash][upash] is straight-forward.  
 
 Just change this:
+
 ```js
 const bcrypt = require('bcrypt');
 
@@ -23,20 +34,7 @@ const match = await bcrypt.compare('password', hash);
 ```
 
 Into this:
-```js
-const bcrypt = require('@upash/bcrypt');
 
-/* HASH */
-// `rounds` is an optional numeric parameter
-const hash = await bcrypt.hash('password', {rounds});
-// save `hash` to db
-
-/* VERIFY */
-// read `hash` from the db
-const match = await bcrypt.verify(hash, 'password');
-```
-
-Or, if you want to use [@upash/universal][universal], into this:
 ```js
 const upash = require('@upash/universal');
 upash.install('bcrypt', require('@upash/bcrypt'));
@@ -44,22 +42,11 @@ upash.install('bcrypt', require('@upash/bcrypt'));
 /* HASH */
 // `rounds` is an optional numeric parameter
 const hash = await upash.use('bcrypt').hash('password', {rounds});
-const hinfo = {func: 'bcrypt', hash: hash};
-const phash = JSON.stringify(hinfo);
-// save `phash` to db
+// save `hash` to db
 
 /* VERIFY */
-// read new `phash` and old `hash` from the db
-let hinfo;
-if (phash) {
-  hinfo = JSON.parse(phash);
-} else {
-  // convert passwords hashed before the migration into the new format
-  hinfo = {func: 'bcrypt', hash: hash};
-  phash = JSON.stringify(hinfo);
-  // update `phash` into the db
-}
-const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
+// read `hash` from the db
+const match = await upash.use('bcrypt').verify(hash, 'password');
 ```
 
 ## Contributing
@@ -78,7 +65,5 @@ This project is licensed under the MIT License - see the [license][license] file
 
 [license]: https://github.com/simonepri/upash/tree/master/license
 [contributing]: https://github.com/simonepri/upash-scrypt/tree/master/.github/contributing.md
-
-[universal]: https://github.com/simonepri/upash-universal
 
 [npm:bcrypt]: https://www.npmjs.com/package/bcrypt

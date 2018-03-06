@@ -3,12 +3,23 @@
     <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="600"/>
   </a>
 </p>
+<p align="center">
+  <!-- Mentioned - Awesome NodeJS -->
+  <a href="https://github.com/sindresorhus/awesome-nodejs#security">
+    <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome NodeJS" />
+  </a>
+  <!-- License - MIT -->
+  <a href="https://github.com/simonepri/upash/tree/master/license">
+    <img src="https://img.shields.io/github/license/simonepri/upash.svg" alt="Project license" />
+  </a>
+</p>
 
 ## Migration from `argon2` package
 If your are using the [argon2][npm:argon2] package, the migration to
 [upash][upash] is straight-forward.  
 
 Just change this:
+
 ```js
 const argon2 = require('argon2');
 
@@ -23,20 +34,7 @@ const match = await argon2.verify(hash, 'password');
 ```
 
 Into this:
-```js
-const argon2 = require('@upash/argon2');
 
-/* HASH */
-// `timeCost`, `memoryCost` and `parallelism` are optional numeric parameters
-const hash = await argon2.hash('password', {timeCost, memoryCost, parallelism});
-// save `hash` to the db
-
-/* VERIFY */
-// read `hash` from the db
-const match = await argon2.verify(hash, 'password');
-```
-
-Or, if you want to use [@upash/universal][universal], into this:
 ```js
 const upash = require('@upash/universal');
 upash.install('argon2', require('@upash/argon2'));
@@ -44,22 +42,11 @@ upash.install('argon2', require('@upash/argon2'));
 /* HASH */
 // `timeCost`, `memoryCost` and `parallelism` are optional numeric parameters
 const hash = await upash.use('argon2').hash('password', {timeCost, memoryCost, parallelism});
-const hinfo = {func: 'argon2', hash: hash};
-const phash = JSON.stringify(hinfo);
-// save `phash` to the db
+// save `hash` to the db
 
 /* VERIFY */
-// read new `phash` and old `hash` from the db
-let hinfo;
-if (phash) {
-  hinfo = JSON.parse(phash);
-} else {
-  // convert passwords hashed before the migration into the new format
-  hinfo = {func: 'argon2', hash: hash};
-  phash = JSON.stringify(hinfo);
-  // update `phash` into the db
-}
-const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
+// read `hash` from the db
+const match = await upash.use('argon2').verify(hash, 'password');
 ```
 
 ## Contributing
@@ -78,7 +65,5 @@ This project is licensed under the MIT License - see the [license][license] file
 
 [license]: https://github.com/simonepri/upash/tree/master/license
 [contributing]: https://github.com/simonepri/upash-scrypt/tree/master/.github/contributing.md
-
-[universal]: https://github.com/simonepri/upash-universal
 
 [npm:argon2]: https://www.npmjs.com/package/argon2

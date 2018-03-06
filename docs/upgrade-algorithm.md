@@ -3,6 +3,16 @@
     <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="600"/>
   </a>
 </p>
+<p align="center">
+  <!-- Mentioned - Awesome NodeJS -->
+  <a href="https://github.com/sindresorhus/awesome-nodejs#security">
+    <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome NodeJS" />
+  </a>
+  <!-- License - MIT -->
+  <a href="https://github.com/simonepri/upash/tree/master/license">
+    <img src="https://img.shields.io/github/license/simonepri/upash.svg" alt="Project license" />
+  </a>
+</p>
 
 ## Upgrading your password hashing algorithm
 If you are using the [@upash/universal][universal] package, upgrading to a new

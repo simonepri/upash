@@ -32,63 +32,72 @@ h**ash**ing algorithms inside your application.
 ***
 
 #### Highlights
-- Single API for all password hashing algorithms
+- [Single API](#why-a-unified-api) for all password hashing algorithms
 - Always up to date secure default configurations
-- [CLI](#cli) available
-- Comprehensive [migration guides](#migrating-your-existing-password-hashing-solution)
+- Makes your hashing logic more maintainable and upgradable
+- Allows you to test configurations through the [CLI](#cli)
+- It has comprehensive [migration guides](#migrating-your-existing-password-hashing-solution)
 
 Do you believe that this is *useful*?
 Has it *saved you time*?
 Or maybe you simply *like it*?  
 If so, [show your appreciation with a Star ⭐️][start].
 
-## Background
-Media covers the theft of large collections of passwords on an almost daily
-basis. Media coverage of password theft discloses the password storage scheme,
-the weakness of that scheme, and often discloses a large population of
-compromised credentials that can affect multiple websites or other applications.
+## Why a Unified API?
+A [simple search on npm](https://www.npmjs.com/search?q=password%20hashing)
+should be enough to convince you that there are lots of packages that deals with
+password hashing. Some of them are strong and secure, while others are
+old and unmaintained.
+The only thing they _have in common_ is that each of them have their own API!  
 
-Proper storage helps prevent theft, compromise, and malicious use of credentials.
-Information systems store passwords and other credentials in a variety of
-protected forms. Common vulnerabilities allow the theft of protected passwords
-through attack vectors such as SQL Injection. Protected passwords can also be
-stolen from artifacts such as logs, dumps, and backups.
+Password hashing is already a pretty complicated topic on its own, why have we
+made it even harder?  
+To make things easier for everyone, upash provides you a set of packages that
+abstracts all the complicated logic behind the common used password hashing
+algorithms, giving you no way to use them wrongly.
 
-The function used to protect stored credentials should balance attacker and
-defender verification. The defender needs an acceptable response time for
-verification of users’ credentials during peak use. However, the time required
-to map `<credential> → <protected form>` must remain beyond threats’ hardware
-(GPU, FPGA) and technique (dictionary-based, brute force, etc) capabilities.
+Moreover an Unified API lets you change your hashing algorithm with ease in
+the future!
 
-Adaptive one-way functions compute a one-way (irreversible) transform.
-Each function allows configuration of ‘work factor’. Underlying mechanisms
-used to achieve irreversibility and govern work factors (such as time, space,
-and parallelism) vary between functions.
-Defenders adjust work factor to keep pace with threats’ increasing hardware
-capabilities. Those implementing adaptive one-way functions must tune work
-factors so as to impede attackers while providing acceptable user experience and
-scale.
+## Usage
+The upash solution is straight-forward but it is important to follow all the
+steps carefully.
 
-Since resources are normally considered limited, a common rule of thumb for
-tuning the work factor (or cost) is to make the function run as slow as
-possible without affecting the users' experience and without increasing the need
-for extra hardware over budget. So, if the registration and authentication's
-cases accept the function taking up to 1 second, you can tune the cost so that
-it takes 1 second to run on your hardware. This way, it shouldn't be so slow
-that your users become affected, but it should also affect the attackers'
-attempt as much as possible. While there is a minimum number of iterations
-recommended to ensure data safety, this value changes every year as technology
-improves.
+Firstly you need to install the `@upash/universal` package
 
-<sub>
-  Part of the content of this section has been adapted from this
-  <a href="https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet">OWASP</a>
-  article and is covered by the
-  <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>
-  license.
-</sub>
+```bash
+npm install --save @upash/universal
+```
 
-## Functions available
+Then you need to choose from the [list of available password hashing algorithms](#hash-functions)
+the one that best suits your needs and install that too.  
+In the following, we will assume that you choose `argon2`, that is also a
+suitable solution in case you don't know which one fits better for you.
+
+```bash
+npm install --save @upash/argon2
+```
+
+Finally you can enjoy the easy APIs.
+
+```js
+const upash = require('@upash/universal');
+
+// Install the hashing function.
+upash.install('argon2', require('@upash/argon2'));
+
+// Hash API.
+const hash = await upash.use('argon2').hash('password provided by the user');
+// => "$argon2i$v=19$m=4096,t=3,p=1$mTFYKhlcxmjS/v6Y8aEd5g$IKGY+vj0MdezVEKHQ9bvjpROoR5HPun5/AUCjQrHSIs"
+
+// Verify API.
+const match = await upash.use('argon2').verify(hash, 'password provided by the user');
+// => true
+```
+
+> ⚠️ You can store the hash returned by the `hash` function directly into your database.
+
+## Hash Functions
 You can choose from one of the following functions to securely store your
 credentials.
 - [@upash/argon2][argon2]: is the winner of the
@@ -100,30 +109,46 @@ required. [[specs]][specs:pbkdf2]
 support isn't. [[specs]][specs:scrypt]
 - [@upash/bcrypt][bcrypt]: where PBKDF2 or scrypt support is not available. [[specs]][specs:bcrypt]
 
-## Suggested usage
-You can choose to use directly one of the functions listed before, but our
-advice is to use them through the [@upash/universal][universal] package.
+> ℹ️ We invite you to do your homework and research about all of them before
+> talking a choice, our suggestion is to use argon2 if you can.
 
-In that way, in the eventuality that you will ever need to change the hashing
-algorithm of your choice in the future, you can do it without any additional
-logic by just installing a new function.  
-You can find more information about the upgrade process in the following
-sections.
+## Can I trust the defaults configurations?
+All the functions provided comes pre-configured but fine tuning is always a good
+practice.  
+The defaults are maintained by the community and the aim of this project is to
+bring together experts to be able to provide you reasonably secure default
+configurations.
 
-```js
-const upash = require('@upash/universal');
+PLEASE if you know your stuff, have a look to the following issues and
+provide your feedback.
+- [Default configurations for argon2][configs:argon2]
+- [Default configurations for pbkdf2][configs:pbkdf2]
+- [Default configurations for scrypt][configs:scrypt]
+- [Default configurations for bcrypt][configs:bcrypt]
 
-// Install argon2 hashing functions
-upash.install('argon2', require('@upash/argon2'));
+🙏 Thank you!
 
-// Hash and verify with argon2 using default secure configs
-const hash = await upash.use('argon2').hash('Super Secret Password');
-const hinfo = {func:'argon2', hash: hash};
-// You can store this directly in your database as plain object or stringified
+## Test configurations through the CLI
+<img src="https://github.com/simonepri/upash/raw/master/media/cli.gif" alt="upash cli" width="400" align="right"/>
 
-// Then you can verify against it in this way
-const match = await upash.use(hinfo.func).verify(hinfo.hash, 'Super Secret Password');
-```
+Each function allows configuration of ‘work factor’. Underlying mechanisms used
+to achieve irreversibility and govern work factors (such as time, space, and
+parallelism) vary between functions.  
+
+You want to adjust the work factor to keep pace with threats’ increasing hardware
+capabilities so as to impede attackers while providing acceptable user experience
+and scale.
+
+A common rule of thumb for tuning the work factor (or cost) is to make the
+function run as slow as possible without affecting the users' experience and
+without increasing the need for extra hardware over budget.
+
+The CLI lets you hash and verify password directly from your terminal.  
+You can use it to test work, memory and parallelism parameters on different
+machines.
+
+For installation and usage information about the CLI, see the [@upash/cli][cli]
+page.
 
 ## Migrating your existing password hashing solution
 If you're not building a new application, chances are high that you have
@@ -133,12 +158,12 @@ upgrade in place without adversely affecting existing user accounts and future
 proofing your upgrade so you can seamlessly upgrade again
 (which you eventually will need to do).
 
-- Migrating from [credential-plus][docs:migration-credential-plus]
-- Migrating from [credential][docs:migration-credential]
-- Migrating from [argon2][docs:migration-argon2]
-- Migrating from [scrypt][docs:migration-scrypt]
-- Migrating from [bcrypt][docs:migration-bcrypt]
-- Migrating from [other libraries][docs:migration-others]
+- [Migrating from credential-plus][docs:migration-credential-plus]
+- [Migrating from credential][docs:migration-credential]
+- [Migrating from argon2][docs:migration-argon2]
+- [Migrating from scrypt][docs:migration-scrypt]
+- [Migrating from bcrypt][docs:migration-bcrypt]
+- [Migrating from other libraries][docs:migration-others]
 
 Please if you don't find a migration documentation that fits your case,
 [open an issue][new issue].
@@ -149,27 +174,12 @@ can be a really painful operation if not done well.
 You should take a lot of attention in order to not adversely affect existing
 user accounts  
 
-[This article](https://veggiespam.com/painless-password-hash-upgrades/) is a
+[This article][migration:guide] is a
 nice start that should give you some ideas on what are the problems related to
 that process.  
 
-Example of implementations can be found in the [dedicated documentation page][docs:upgrade-algorithm].
-
-## CLI
-<img src="https://github.com/simonepri/upash/raw/master/media/cli.gif" alt="upash cli" width="400" align="right"/>
-
-The idea behind this project is to make Password Hashing Algorithms as
-accessible as possible.  
-For this reason, the Unified APIs are also available through a CLI.
-
-The CLI lets you hash and verify password directly from your terminal.  
-You can use it to test work, memory and parallelism parameters on different
-machines.
-
-For installation and usage information about the CLI, see the [@upash/cli][cli]
-page.
-<br/><br/>
-
+Example of implementations can be found in the
+[dedicated documentation page][docs:upgrade-algorithm].
 
 ## Related
 - [@upash/universal][universal] -
@@ -220,12 +230,19 @@ This project is licensed under the MIT License - see the [license][license] file
 [twitter:simonepri]: http://twitter.com/intent/user?screen_name=simoneprimarosa
 
 [argon2:password-competition]: https://password-hashing.net/
+[migration:guide]: https://veggiespam.com/painless-password-hash-upgrades/
 [upash:pronounce]: https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=u-pash
 
 [specs:argon2]: https://password-hashing.net/argon2-specs.pdf
 [specs:pbkdf2]: http://www.ietf.org/rfc/rfc2898.txt
 [specs:scrypt]: http://www.tarsnap.com/scrypt/scrypt.pdf
 [specs:bcrypt]: https://www.openbsd.org/papers/bcrypt-paper.pdf
+
+
+[configs:argon2]: https://github.com/simonepri/upash-argon2/issues/5)
+[configs:pbkdf2]: https://github.com/simonepri/upash-pbkdf2/issues/5)
+[configs:scrypt]: https://github.com/simonepri/upash-scrypt/issues/5)
+[configs:bcrypt]: https://github.com/simonepri/upash-bcrypt/issues/5)
 
 [docs:migration-credential-plus]: https://github.com/simonepri/upash/tree/master/docs/migration-credential-plus.md
 [docs:migration-credential]: https://github.com/simonepri/upash/tree/master/docs/migration-credential.md

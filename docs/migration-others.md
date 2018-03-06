@@ -3,12 +3,23 @@
     <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="600"/>
   </a>
 </p>
+<p align="center">
+  <!-- Mentioned - Awesome NodeJS -->
+  <a href="https://github.com/sindresorhus/awesome-nodejs#security">
+    <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome NodeJS" />
+  </a>
+  <!-- License - MIT -->
+  <a href="https://github.com/simonepri/upash/tree/master/license">
+    <img src="https://img.shields.io/github/license/simonepri/upash.svg" alt="Project license" />
+  </a>
+</p>
 
 ## Migration from custom implementations
 If you are using a custom logic for your hashing/verification logic you can
-still migrate to [upash][upash] using [@upash/universal][universal].
+still migrate to [upash][upash].
 
 You just need to create the following two function:
+
 ```js
 function myHashLogic(password, options) {
   /* Your custom code here */
@@ -30,41 +41,12 @@ upash.install('custom', {
 
 /* HASH */
 // `options` is an optional object to pass to your custom hash function
-const hash = await upash.hash('custom', 'password', options);
+const hash = await upash.use('custom').hash('password', options);
 // save `hash` to the db
 
 /* VERIFY */
 // read `hash` from the db
-const match = await upash.verify('custom', hash, 'password');
-```
-
-Or, if you want to use [@upash/universal][universal] and make it upgradable, into this:
-```js
-const upash = require('@upash/universal');
-upash.install('custom', {
-  hash: myHashLogic,
-  verify: myVerifyLogic,
-});
-
-/* HASH */
-// `options` is an optional object to pass to your custom hash function
-const hash = await upash.use('custom').hash('password', options);
-const hinfo = {func: 'custom', hash: hash};
-const phash = JSON.stringify(hinfo);
-// save phash to the db
-
-/* VERIFY */
-// read new `phash` and old `hash` from the db
-let hinfo;
-if (phash) {
-  hinfo = JSON.parse(phash);
-} else {
-  // convert passwords hashed before the migration into the new format
-  hinfo = {func: 'custom', hash: hash};
-  phash = JSON.stringify(hinfo);
-  // update `phash` into the db
-}
-const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
+const match = await upash.use('custom').verify(hash, 'password');
 ```
 
 ## Contributing
@@ -83,5 +65,3 @@ This project is licensed under the MIT License - see the [license][license] file
 
 [license]: https://github.com/simonepri/upash/tree/master/license
 [contributing]: https://github.com/simonepri/upash-scrypt/tree/master/.github/contributing.md
-
-[universal]: https://github.com/simonepri/upash-universal

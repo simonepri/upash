@@ -3,14 +3,24 @@
     <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="600"/>
   </a>
 </p>
+<p align="center">
+  <!-- Mentioned - Awesome NodeJS -->
+  <a href="https://github.com/sindresorhus/awesome-nodejs#security">
+    <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome NodeJS" />
+  </a>
+  <!-- License - MIT -->
+  <a href="https://github.com/simonepri/upash/tree/master/license">
+    <img src="https://img.shields.io/github/license/simonepri/upash.svg" alt="Project license" />
+  </a>
+</p>
 
 ## Migration from `credential-plus` package
 If your are using the [credential-plus][npm:credential-plus] package, the
 migration to [upash][upash] is straight-forward.  
 
 ### If you were using it in combination with `credential-plus-argon2`
-
 Change this:
+
 ```js
 const credential = require('credential-plus');
 credential.install(require('credential-plus-argon2'));
@@ -26,6 +36,7 @@ const match = await credential.verify(phash, password);
 ```
 
 Into this:
+
 ```js
 const upash = require('@upash/universal');
 upash.install('argon2', require('@upash/argon2'));
@@ -45,6 +56,7 @@ const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
 
 ### If you were using it in combination with `credential-plus-scrypt`
 Change this:
+
 ```js
 const credential = require('credential-plus');
 credential.install(require('credential-plus-scrypt'));
@@ -60,6 +72,7 @@ const match = await credential.verify(phash, password);
 ```
 
 Into this:
+
 ```js
 const upash = require('@upash/universal');
 upash.install('scrypt', require('@upash/scrypt'));
@@ -79,6 +92,7 @@ const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
 
 ### If you were using it in combination with `credential-plus-bcrypt`
 Change this:
+
 ```js
 const credential = require('credential-plus');
 credential.install(require('credential-plus-bcrypt'));
@@ -94,6 +108,7 @@ const match = await credential.verify(phash, password);
 ```
 
 Into this:
+
 ```js
 const upash = require('@upash/universal');
 upash.install('bcrypt', require('@upash/bcrypt'));
@@ -113,6 +128,7 @@ const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
 
 ### If you were using it in combination with `credential-plus-pbkdf2`
 Change this:
+
 ```js
 const credential = require('credential-plus');
 credential.install(require('credential-plus-pbkdf2'));
@@ -128,6 +144,7 @@ const match = await credential.verify(phash, password);
 ```
 
 Into this:
+
 ```js
 const upash = require('@upash/universal');
 upash.install('pbkdf2', require('@upash/pbkdf2'));
@@ -167,7 +184,5 @@ This project is licensed under the MIT License - see the [license][license] file
 
 [license]: https://github.com/simonepri/upash/tree/master/license
 [contributing]: https://github.com/simonepri/upash-scrypt/tree/master/.github/contributing.md
-
-[universal]: https://github.com/simonepri/upash-universal
 
 [npm:credential-plus]: https://www.npmjs.com/package/credential-plus

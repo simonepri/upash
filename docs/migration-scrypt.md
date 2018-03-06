@@ -3,12 +3,23 @@
     <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="600"/>
   </a>
 </p>
+<p align="center">
+  <!-- Mentioned - Awesome NodeJS -->
+  <a href="https://github.com/sindresorhus/awesome-nodejs#security">
+    <img src="https://awesome.re/mentioned-badge.svg" alt="Mentioned in Awesome NodeJS" />
+  </a>
+  <!-- License - MIT -->
+  <a href="https://github.com/simonepri/upash/tree/master/license">
+    <img src="https://img.shields.io/github/license/simonepri/upash.svg" alt="Project license" />
+  </a>
+</p>
 
 ## Migration from `scrypt` package
 If your are using the [scrypt][npm:scrypt] package, the migration to
 [upash][upash] is straight-forward.  
 
 Just change this:
+
 ```js
 const scrypt = require('scrypt');
 const Buffer = require('safe-buffer').Buffer;
@@ -27,20 +38,7 @@ const match = await scrypt.verifyKdf(Buffer.from(hash, 'base64'), Buffer.from(pa
 ```
 
 Into this:
-```js
-const scrypt = require('@upash/scrypt');
 
-/* HASH */
-// `maxtime`, `maxmem` and `maxmemfrac` are an optional numeric parameters
-const hash = await scrypt.hash('password', {maxtime, maxmem, maxmemfrac});
-// save `hash` to the db
-
-/* VERIFY */
-// read `hash` from the db
-const match = await scrypt.verify(hash, 'password');
-```
-
-Or, if you want to use [@upash/universal][universal], into this:
 ```js
 const upash = require('@upash/universal');
 upash.install('scrypt', require('@upash/scrypt'));
@@ -48,22 +46,11 @@ upash.install('scrypt', require('@upash/scrypt'));
 /* HASH */
 // `maxtime`, `maxmem` and `maxmemfrac` are an optional numeric parameters
 const hash = await upash.use('scrypt').hash('password', {maxtime, maxmem, maxmemfrac});
-const hinfo = {func: 'scrypt', hash: hash};
-const phash = JSON.stringify(hinfo);
-// save phash to the db
+// save `hash` to the db
 
 /* VERIFY */
-// read new `phash` and old `hash` from the db
-let hinfo;
-if (phash) {
-  hinfo = JSON.parse(phash);
-} else {
-  // convert passwords hashed before the migration into the new format
-  hinfo = {func: 'scrypt', hash: phash};
-  phash = JSON.stringify(hinfo);
-  // update `phash` into the db
-}
-const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
+// read `hash` from the db
+const match = await upash.use('scrypt').verify(hash, 'password');
 ```
 
 ## Contributing
@@ -82,7 +69,5 @@ This project is licensed under the MIT License - see the [license][license] file
 
 [license]: https://github.com/simonepri/upash/tree/master/license
 [contributing]: https://github.com/simonepri/upash-scrypt/tree/master/.github/contributing.md
-
-[universal]: https://github.com/simonepri/upash-universal
 
 [npm:scrypt]: https://www.npmjs.com/package/scrypt
