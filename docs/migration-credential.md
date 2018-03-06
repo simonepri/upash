@@ -49,7 +49,7 @@ const upash = require('@upash/universal');
 upash.install('pbkdf2', require('@upash/pbkdf2'));
 
 // `iterations`, `keylen` and `digest` are optional parameters
-const hash = await upash.hash('pbkdf2', password, {iterations, keylen, digest});
+const hash = await upash.use('pbkdf2').hash(password, {iterations, keylen, digest});
 const hinfo = {func: 'pbkdf2', hash: hash};
 const phash = JSON.stringify(hinfo);
 // save `phash` to the db
@@ -69,7 +69,7 @@ if (phash) {
   phash = JSON.stringify(hinfo);
   // update `phash` into the db
 } catch (err) {}
-const match = await upash.verify(hinfo.func, hinfo.hash, password);
+const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
 ```
 
 ## Contributing

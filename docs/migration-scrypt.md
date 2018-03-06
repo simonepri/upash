@@ -47,7 +47,7 @@ upash.install('scrypt', require('@upash/scrypt'));
 
 /* HASH */
 // `maxtime`, `maxmem` and `maxmemfrac` are an optional numeric parameters
-const hash = await upash.hash('scrypt', 'password', {maxtime, maxmem, maxmemfrac});
+const hash = await upash.use('scrypt').hash('password', {maxtime, maxmem, maxmemfrac});
 const hinfo = {func: 'scrypt', hash: hash};
 const phash = JSON.stringify(hinfo);
 // save phash to the db
@@ -63,7 +63,7 @@ if (phash) {
   phash = JSON.stringify(hinfo);
   // update `phash` into the db
 }
-const match = await upash.verify(hinfo.func, hinfo.hash, password);
+const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
 ```
 
 ## Contributing

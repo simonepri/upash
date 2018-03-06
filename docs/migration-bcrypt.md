@@ -43,7 +43,7 @@ upash.install('bcrypt', require('@upash/bcrypt'));
 
 /* HASH */
 // `rounds` is an optional numeric parameter
-const hash = await upash.hash('bcrypt', 'password', {rounds});
+const hash = await upash.use('bcrypt').hash('password', {rounds});
 const hinfo = {func: 'bcrypt', hash: hash};
 const phash = JSON.stringify(hinfo);
 // save `phash` to db
@@ -59,7 +59,7 @@ if (phash) {
   phash = JSON.stringify(hinfo);
   // update `phash` into the db
 }
-const match = await upash.verify(hinfo.func, hinfo.hash, password);
+const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
 ```
 
 ## Contributing

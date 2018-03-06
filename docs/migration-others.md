@@ -48,7 +48,7 @@ upash.install('custom', {
 
 /* HASH */
 // `options` is an optional object to pass to your custom hash function
-const hash = await upash.hash('custom', 'password', options);
+const hash = await upash.use('custom').hash('password', options);
 const hinfo = {func: 'custom', hash: hash};
 const phash = JSON.stringify(hinfo);
 // save phash to the db
@@ -64,7 +64,7 @@ if (phash) {
   phash = JSON.stringify(hinfo);
   // update `phash` into the db
 }
-const match = await upash.verify(hinfo.func, hinfo.hash, password);
+const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
 ```
 
 ## Contributing

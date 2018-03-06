@@ -43,7 +43,7 @@ upash.install('argon2', require('@upash/argon2'));
 
 /* HASH */
 // `timeCost`, `memoryCost` and `parallelism` are optional numeric parameters
-const hash = await upash.hash('argon2', 'password', {timeCost, memoryCost, parallelism});
+const hash = await upash.use('argon2').hash('password', {timeCost, memoryCost, parallelism});
 const hinfo = {func: 'argon2', hash: hash};
 const phash = JSON.stringify(hinfo);
 // save `phash` to the db
@@ -59,7 +59,7 @@ if (phash) {
   phash = JSON.stringify(hinfo);
   // update `phash` into the db
 }
-const match = await upash.verify(hinfo.func, hinfo.hash, password);
+const match = await upash.use(hinfo.func).verify(hinfo.hash, password);
 ```
 
 ## Contributing

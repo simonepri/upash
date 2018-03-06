@@ -29,6 +29,7 @@
 The upash ([pronounced u-pash][upash:pronounce]) project provides you a
 **U**nified API to implement secured and well-configured **p**assword
 h**ash**ing algorithms inside your application.
+***
 
 #### Highlights
 - Single API for all password hashing algorithms
@@ -116,12 +117,12 @@ const upash = require('@upash/universal');
 upash.install('argon2', require('@upash/argon2'));
 
 // Hash and verify with argon2 using default secure configs
-const hash = await upash.hash('argon2', 'Super Secret Password');
+const hash = await upash.use('argon2').hash('Super Secret Password');
 const hinfo = {func:'argon2', hash: hash};
 // You can store this directly in your database as plain object or stringified
 
 // Then you can verify against it in this way
-const match = await upash.verify(hinfo.func, hinfo.hash, 'Super Secret Password');
+const match = await upash.use(hinfo.func).verify(hinfo.hash, 'Super Secret Password');
 ```
 
 ## Migrating your existing password hashing solution

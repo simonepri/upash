@@ -15,7 +15,7 @@ const upash = require('@upash/universal');
 upash.install('pbkdf2', require('@upash/pbkdf2'));
 
 async function registration(email, password) {
-  const hash = upash.hash('pbkdf2', password);
+  const hash = upash.use('pbkdf2').hash(password);
   const hinfo = {func: 'pbkdf2', hash: hash};
   const phash = JSON.stringify(hinfo);
   // db.users.new({email: email, phash: phash});
@@ -24,7 +24,7 @@ async function registration(email, password) {
 async function login(email, password) {
   // const user = db.users.find({email: email});
   const hinfo = JSON.parse(user.phash);
-  const match = upash.verify(hinfo.func, hinfo.hash);
+  const match = upash.use(hinfo.func).verify(hinfo.hash, password);
   // do something with the match variable
 }
 ```
@@ -38,7 +38,7 @@ upash.install('pbkdf2', require('@upash/pbkdf2'));
 upash.install('argon2', require('@upash/argon2'));
 
 async function registration(email, password) {
-  const hash = upash.hash('argon2', password);
+  const hash = upash.use('argon2').hash(password);
   const hinfo = {func: 'argon2', hash: hash};
   const phash = JSON.stringify(hinfo);
   // db.users.new({email: email, phash: phash});
@@ -47,10 +47,10 @@ async function registration(email, password) {
 async function login(email, password) {
   // const user = db.users.find({email: email});
   let hinfo = JSON.parse(user.phash);
-  const match = upash.verify(hinfo.func, hinfo.hash);
+  const match = upash.use(hinfo.func).verify(hinfo.hash, password);
 
   if (match && hinfo.func !== 'argon2') {
-    const hash = upash.hash('argon2', password);
+    const hash = upash.use('argon2').hash(password);
     hinfo = {func: 'argon2', hash: hash};
     const phash = JSON.stringify(hinfo);
     // db.users.update({email: email, phash: phash});
