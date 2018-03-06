@@ -162,7 +162,7 @@ support isn't. [[specs]][specs:scrypt]
 > ℹ️ We invite you to do your homework and research about all of them before
 > talking a choice, our suggestion is to use argon2 if you can.
 
-## Can I trust the defaults configurations?
+## Can I trust the default configurations?
 All the functions provided comes pre-configured but fine tuning is always a good
 practice.  
 The defaults are maintained by the community and the aim of this project is to
