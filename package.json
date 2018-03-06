@@ -1,0 +1,121 @@
+{
+  "name": "@upash/universal",
+  "version": "2.0.0",
+  "description": "Easy to use Unified API for all password hashing algorithms",
+  "license": "MIT",
+  "homepage": "https://github.com/simonepri/upash#readme",
+  "repository": "github:simonepri/upash",
+  "bugs": {
+    "url": "https://github.com/simonepri/upash/issues",
+    "email": "simonepri@outlook.com"
+  },
+  "author": "Simone Primarosa <simonepri@outlook.com> (https://simoneprimarosa.com)",
+  "contributors": [
+    "Simone Primarosa <simonepri@outlook.com> (https://simoneprimarosa.com)"
+  ],
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo &&nyc ava",
+    "release": "np",
+    "update": "npm-check -u"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "ava": "*",
+    "np": "*",
+    "npm-check": "*",
+    "nyc": "*",
+    "xo": "*"
+  },
+  "keywords": [
+    "account",
+    "accounts",
+    "algorithm",
+    "algorithms",
+    "API",
+    "APIs",
+    "application",
+    "argon2",
+    "attack",
+    "attacks",
+    "auth",
+    "authentication",
+    "authorization",
+    "bcrypt",
+    "brute",
+    "cli",
+    "command",
+    "credential",
+    "credentials",
+    "cryptographically",
+    "derivation",
+    "easy",
+    "force",
+    "form",
+    "function",
+    "hash",
+    "hashing",
+    "interface",
+    "irreversible",
+    "kdf",
+    "key",
+    "line",
+    "login",
+    "one",
+    "one-way",
+    "password",
+    "passwords",
+    "PBKDF",
+    "PBKDF1",
+    "PBKDF2",
+    "pbkdf2-crypt",
+    "plus",
+    "programming",
+    "protected",
+    "rainbow",
+    "resistance",
+    "salt",
+    "scrypt",
+    "secure",
+    "security",
+    "sign in",
+    "simple",
+    "store",
+    "stretching",
+    "strong",
+    "table",
+    "time",
+    "timining",
+    "transform",
+    "unified",
+    "universal",
+    "upash",
+    "user",
+    "users",
+    "verification",
+    "verify",
+    "way"
+  ],
+  "ava": {
+    "verbose": true
+  },
+  "nyc": {
+    "reporter": [
+      "lcovonly",
+      "text"
+    ]
+  },
+  "xo": {
+    "prettier": true,
+    "space": true
+  }
+}
