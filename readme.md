@@ -33,8 +33,8 @@ h**ash**ing algorithms inside your application.
 
 #### Highlights
 - [Single API](#why-a-unified-api) for all password hashing algorithms
-- Always up to date secure default configurations
-- Makes your hashing logic more maintainable and upgradable
+- Always up to date secure [default configurations](#can-i-trust-the-defaults-configurations)
+- Makes your hashing logic more maintainable and [upgradable](#upgrading-your-password-hashing-algorithm)
 - Allows you to test configurations through the [CLI](#cli)
 - It has comprehensive [migration guides](#migrating-your-existing-password-hashing-solution)
 
