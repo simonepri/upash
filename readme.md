@@ -239,10 +239,10 @@ This project is licensed under the MIT License - see the [license][license] file
 [specs:bcrypt]: https://www.openbsd.org/papers/bcrypt-paper.pdf
 
 
-[configs:argon2]: https://github.com/simonepri/upash-argon2/issues/5)
-[configs:pbkdf2]: https://github.com/simonepri/upash-pbkdf2/issues/5)
-[configs:scrypt]: https://github.com/simonepri/upash-scrypt/issues/5)
-[configs:bcrypt]: https://github.com/simonepri/upash-bcrypt/issues/5)
+[configs:argon2]: https://github.com/simonepri/upash-argon2/issues/5
+[configs:pbkdf2]: https://github.com/simonepri/upash-pbkdf2/issues/5
+[configs:scrypt]: https://github.com/simonepri/upash-scrypt/issues/5
+[configs:bcrypt]: https://github.com/simonepri/upash-bcrypt/issues/5
 
 [docs:migration-credential-plus]: https://github.com/simonepri/upash/tree/master/docs/migration-credential-plus.md
 [docs:migration-credential]: https://github.com/simonepri/upash/tree/master/docs/migration-credential.md
