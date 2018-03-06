@@ -95,7 +95,7 @@ If so, [show your appreciation with a Star ⭐️][start].
 
 ## Why a Unified API?
 A [simple search on npm](https://www.npmjs.com/search?q=password%20hashing)
-should be enough to convince you that there are lots of packages that deals with
+should be enough to convince you that there are lots of packages that deal with
 password hashing. Some of them are strong and secure, while others are
 old and unmaintained.
 The only thing they _have in common_ is that each of them have their own API!  
@@ -103,10 +103,10 @@ The only thing they _have in common_ is that each of them have their own API!
 Password hashing is already a pretty complicated topic on its own, why have we
 made it even harder?  
 To make things easier for everyone, upash provides you a set of packages that
-abstracts all the complicated logic behind the common used password hashing
+abstracts all the complicated logic behind the commonly used password hashing
 algorithms, giving you no way to use them wrongly.
 
-Moreover an Unified API lets you change your hashing algorithm with ease in
+Moreover a Unified API lets you change your hashing algorithm with ease in
 the future!
 
 ## Usage
@@ -128,7 +128,7 @@ suitable solution in case you don't know which one fits better for you.
 npm install --save @upash/argon2
 ```
 
-Finally you can enjoy the easy APIs.
+Finally, you can enjoy the easy APIs.
 
 ```js
 const upash = require('@upash/universal');
@@ -160,16 +160,16 @@ support isn't. [[specs]][specs:scrypt]
 - [@upash/bcrypt][bcrypt]: where PBKDF2 or scrypt support is not available. [[specs]][specs:bcrypt]
 
 > ℹ️ We invite you to do your homework and research about all of them before
-> talking a choice, our suggestion is to use argon2 if you can.
+> taking a choice, our suggestion is to use argon2 if you can.
 
 ## Can I trust the default configurations?
-All the functions provided comes pre-configured but fine tuning is always a good
+All the functions provided comes pre-configured but fine-tuning is always a good
 practice.  
 The defaults are maintained by the community and the aim of this project is to
 bring together experts to be able to provide you reasonably secure default
 configurations.
 
-PLEASE if you know your stuff, have a look to the following issues and
+PLEASE if you know your stuff, have a look at the following issues and
 provide your feedback.
 - [Default configurations for argon2][configs:argon2]
 - [Default configurations for pbkdf2][configs:pbkdf2]
@@ -203,7 +203,7 @@ page.
 ## Migrating your existing password hashing solution
 If you're not building a new application, chances are high that you have
 already implemented some hash/verify logic for your passwords.
-The following documentation provide some good guidance on how to accomplish an
+The following documentation provides some good guidance on how to accomplish an
 upgrade in place without adversely affecting existing user accounts and future
 proofing your upgrade so you can seamlessly upgrade again
 (which you eventually will need to do).
@@ -252,7 +252,7 @@ Thanks!
 ## Authors
 - **Simone Primarosa** - *Follow* me on
 *Github* ([:octocat:@simonepri][github:simonepri]) and on
-*Twitter* ([🐦@simonepri][twitter:simonepri])
+*Twitter* ([🐦@simoneprimarosa][twitter:simoneprimarosa])
 
 See also the list of [contributors][contributors] who participated in this project.
 
@@ -274,7 +274,7 @@ This project is licensed under the MIT License - see the [license][license] file
 [pbkdf2]: https://github.com/simonepri/upash-pbkdf2
 
 [github:simonepri]: https://github.com/simonepri
-[twitter:simonepri]: http://twitter.com/intent/user?screen_name=simoneprimarosa
+[twitter:simoneprimarosa]: http://twitter.com/intent/user?screen_name=simoneprimarosa
 
 [argon2:password-competition]: https://password-hashing.net/
 [migration:guide]: https://veggiespam.com/painless-password-hash-upgrades/
