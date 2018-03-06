@@ -128,7 +128,7 @@ provide your feedback.
 
 🙏 Thank you!
 
-## Test configurations through the CLI
+## Test configurations through the CLI
 <img src="https://github.com/simonepri/upash/raw/master/media/cli.gif" alt="upash cli" width="400" align="right"/>
 
 Each function allows configuration of ‘work factor’. Underlying mechanisms used
