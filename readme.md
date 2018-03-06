@@ -33,7 +33,8 @@ h**ash**ing algorithms inside your application.
 #### Highlights
 - Single API for all password hashing algorithms
 - Always up to date secure default configurations
-- CLI available
+- [CLI](#cli) available
+- Comprehensive [migration guides](#migrating-your-existing-password-hashing-solution)
 
 Do you believe that this is *useful*?
 Has it *saved you time*?
