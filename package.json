@@ -1,7 +1,7 @@
 {
-  "name": "@upash/universal",
-  "version": "2.0.2",
-  "description": "Easy to use Unified API for all password hashing algorithms",
+  "name": "upash",
+  "version": "0.0.0",
+  "description": "Painless Unified API for any password hashing algorithm",
   "license": "MIT",
   "homepage": "https://github.com/simonepri/upash#readme",
   "repository": "github:simonepri/upash",
@@ -13,29 +13,6 @@
   "contributors": [
     "Simone Primarosa <simonepri@outlook.com> (https://simoneprimarosa.com)"
   ],
-  "main": "index.js",
-  "files": [
-    "index.js"
-  ],
-  "engines": {
-    "node": ">=4"
-  },
-  "scripts": {
-    "test": "xo &&nyc ava",
-    "release": "np",
-    "update": "npm-check -u"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "ava": "*",
-    "np": "*",
-    "npm-check": "*",
-    "nyc": "*",
-    "xo": "*"
-  },
   "keywords": [
     "account",
     "accounts",
@@ -105,6 +82,26 @@
     "verify",
     "way"
   ],
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo &&nyc ava",
+    "release": "np",
+    "update": "npm-check -u"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "ava": "*",
+    "np": "*",
+    "npm-check": "*",
+    "nyc": "*",
+    "xo": "*"
+  },
   "ava": {
     "verbose": true
   },
@@ -116,6 +113,9 @@
   },
   "xo": {
     "prettier": true,
-    "space": true
+    "space": true,
+    "rules": {
+      "prefer-destructuring": "off"
+    }
   }
 }
