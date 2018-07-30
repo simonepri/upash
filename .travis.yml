@@ -1,18 +1,24 @@
 sudo: false
 language: node_js
 node_js:
+  - '10'
   - '8'
-  - '7'
   - '6'
-  - '5'
-  - '4'
-script:
-  - npm run test
-after_success:
-  - npx codecov
-cache:
-  directories:
-  - node_modules
 os:
   - linux
   - osx
+cache:
+  directories:
+  - node_modules
+install:
+  - npm i -g npx
+  - npm install
+script:
+  - node --version
+  - npm --version
+  - npx --version
+  - node -e "console.log('RAM:', require('os').totalmem().toLocaleString(), 'bytes')"
+  - node -e "console.log('CPU:', require('os').cpus().length, 'x', require('os').cpus()[0].model)"
+  - npm test
+after_test:
+  - npx codecov
