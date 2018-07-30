@@ -64,7 +64,7 @@
   </a>
 </p>
 <p align="center">
-  🔒 <b>Painless <b>U</b>nified API for any <b>PAS</b>sword <b>H</b>ashing algorithm
+  🔒 Painless <b>U</b>nified API for any <b>PAS</b>sword <b>H</b>ashing algorithm
 
   <br/>
 
