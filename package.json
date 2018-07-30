@@ -1,7 +1,7 @@
 {
   "name": "upash",
   "version": "1.0.0",
-  "description": "Unified APIs for password hashing algorithms",
+  "description": "Unified API for password hashing algorithms",
   "license": "MIT",
   "homepage": "https://github.com/simonepri/upash#readme",
   "repository": "github:simonepri/upash",

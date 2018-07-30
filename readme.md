@@ -64,7 +64,7 @@
   </a>
 </p>
 <p align="center">
-  🔒 <b>U</b>nified APIs for <b>PAS</b>sword <b>H</b>ashing algorithms
+  🔒 <b>U</b>nified API for <b>PAS</b>sword <b>H</b>ashing algorithms
 
   <br/>
 
