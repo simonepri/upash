@@ -64,7 +64,7 @@
   </a>
 </p>
 <p align="center">
-  🔒 Painless <b>U</b>nified API for any <b>PAS</b>sword <b>H</b>ashing algorithm
+  🔒 <b>U</b>nified APIs for <b>PAS</b>sword <b>H</b>ashing algorithms
 
   <br/>
 
