@@ -173,7 +173,7 @@ The defaults are maintained by the community and the aim of this project is also
 to bring together experts to be able to provide you reasonably secure default
 configurations.
 
-#### Packages that adhere to the PHC string format
+#### Packages that adhere to the PHC string format
 - [@phc/argon2][alg:@phc/argon2]
 - [@phc/pbkdf2][alg:@phc/pbkdf2]
 - [@phc/scrypt][alg:@phc/scrypt]
@@ -221,7 +221,7 @@ Please if you do not find a migration documentation that fits your case,
 Upgrading the hashing algorithm used to hash passwords inside your application
 can be a really painful operation if not done well.
 You should take a lot of attention in order to not adversely affect existing
-user accounts  
+user accounts.  
 
 [This article][docs:ext:upgrade-algorithm] is a nice start that should give you
 some ideas on what are the problems related to that process.  
@@ -389,7 +389,7 @@ This project is licensed under the MIT License - see the [license][license] file
 [docs:migration-guide]: https://github.com/simonepri/upash/tree/master/docs/migrate-your-solution.md
 [docs:upgrade-algorithm]: https://github.com/simonepri/upash/tree/master/docs/upgrade-algorithm.md
 [docs:password-hashing-theory]: https://github.com/simonepri/upash/tree/master/docs/password-hashing-theory.md
-[docs:ext:upgrade-algorithm]: https://veggiespam.com/painless-password-hash-upgrades/]
+[docs:ext:upgrade-algorithm]: https://veggiespam.com/painless-password-hash-upgrades/
 
 [breach:yahoo]: https://help.yahoo.com/kb/account/SLN27925.html
 [breach:yahoo2]: https://help.yahoo.com/kb/account/sln28092.html
