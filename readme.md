@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/simonepri/upash">
-    <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="600"/>
+    <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="300"/>
   </a>
 </p>
 <p align="center">
@@ -108,7 +108,8 @@ Firstly, you need to install this package.
 ```bash
 npm install --save upash
 ```
-Then, you need to choose from the [list of supported password hashing algorithms](#hash-functions)
+Then, you need to choose from the
+[list of supported password hashing algorithms](#recommended-algorithms-implementations)
 the one that best suits your needs and install that too.  
 In the following, we will assume that you choose `@phc/argon2`, that is also a
 suitable solution in case you don't know which one fits better for you.

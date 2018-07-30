@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/simonepri/upash">
-    <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="600"/>
+    <img src="https://github.com/simonepri/upash/raw/master/media/upash.png" alt="upash" width="300"/>
   </a>
 </p>
 <p align="center">
