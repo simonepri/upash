@@ -100,7 +100,7 @@ seamlessly in your application.
 - Comprehensive list of supported [hashing algorithms](#recommended-algorithms-implementations)
 
 Do you believe that this is useful? Has it saved you time? Or maybe you simply like it?  
-If so, support my work with a Star ⭐️.
+If so, [support my work with a Star ⭐️][start].
 
 ## Usage
 The upash solution is straight-forward but it is important to follow all the
