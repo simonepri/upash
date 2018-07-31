@@ -99,6 +99,9 @@ seamlessly in your application.
 - Step by step [migration guide](#migrating-your-existing-password-hashing-solution)
 - Comprehensive list of supported [hashing algorithms](#recommended-algorithms-implementations)
 
+Do you believe that this is useful? Has it saved you time? Or maybe you simply like it?
+If so, support my work with a Star ⭐️.
+
 ## Usage
 The upash solution is straight-forward but it is important to follow all the
 steps carefully.
