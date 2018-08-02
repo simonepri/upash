@@ -124,7 +124,7 @@ npm install --save @phc/argon2
 Finally, you can enjoy the easy APIs.
 
 ```js
-const upash = require('@upash');
+const upash = require('upash');
 
 // Install the algorithm of your choice.
 upash.install('argon2', require('@phc/argon2'));
@@ -145,7 +145,7 @@ This is really handy when you want to update your current password hashing
 algorithm.
 
 ```js
-const upash = require('@upash');
+const upash = require('upash');
 
 // Install the algorithms of your choice.
 upash.install('pbkdf2', require('@phc/pbkdf2'));
