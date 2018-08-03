@@ -177,14 +177,21 @@ The defaults are maintained by the community and the aim of this project is also
 to bring together experts to be able to provide you reasonably secure default
 configurations.
 
-#### Packages that adhere to the PHC string format
-- [@phc/argon2][alg:@phc/argon2]
-- [@phc/pbkdf2][alg:@phc/pbkdf2]
-- [@phc/scrypt][alg:@phc/scrypt]
-- [@phc/bcrypt][alg:@phc/bcrypt]
+#### Packages that are implemented natively (Node.js only)
+- [@phc/argon2][alg:@phc/argon2] - 🔒 Node.JS argon2 password hashing algorithm following the PHC string format.
+- [@phc/pbkdf2][alg:@phc/pbkdf2] - 🔒 Node.JS pbkdf2 password hashing algorithm following the PHC string format.
+- [@phc/scrypt][alg:@phc/scrypt] - 🔒 Node.JS scrypt password hashing algorithm following the PHC string format.
+- [@phc/bcrypt][alg:@phc/bcrypt] - 🔒 Node.JS scrypt password hashing algorithm following the PHC string format.
 
-#### Other packages
-- N/A
+#### Packages that are implemented in JavaScript (Browser compatible)
+- WIP
+
+> If you wanna help me with these [DM me on twitter][twitter:simoneprimarosa].
+
+#### Packages that are implemented in WebAssembly (Browser compatible)
+- WIP
+
+> If you wanna help me with these [DM me on twitter][twitter:simoneprimarosa].
 
 Want your package listed here? [Open an issue][new issue] and we will review it.
 
