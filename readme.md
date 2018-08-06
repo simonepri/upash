@@ -181,7 +181,7 @@ configurations.
 - [@phc/argon2][alg:@phc/argon2] - 🔒 Node.JS argon2 password hashing algorithm following the PHC string format.
 - [@phc/pbkdf2][alg:@phc/pbkdf2] - 🔒 Node.JS pbkdf2 password hashing algorithm following the PHC string format.
 - [@phc/scrypt][alg:@phc/scrypt] - 🔒 Node.JS scrypt password hashing algorithm following the PHC string format.
-- [@phc/bcrypt][alg:@phc/bcrypt] - 🔒 Node.JS scrypt password hashing algorithm following the PHC string format.
+- [@phc/bcrypt][alg:@phc/bcrypt] - 🔒 Node.JS bcrypt password hashing algorithm following the PHC string format.
 
 #### Packages that are implemented in JavaScript (Browser compatible)
 - WIP
