@@ -1,7 +1,16 @@
 'use strict';
 
-const funcs = {};
-const queue = [];
+function Upash(algorithms, options) {
+  this.funcs = {};
+  this.queue = [];
+  this.default = options && (options.default || null);
+
+  if (algorithms) {
+    Object.keys(algorithms).forEach(current => {
+      this.install(current, algorithms[current]);
+    });
+  }
+}
 
 /**
  * Installs a compatible password hashing function.
@@ -16,7 +25,7 @@ const queue = [];
  * @param {Function} algorithm.identifiers A function that returns the list of
  * identifiers that this password hashing algorithm is able to generate / verify.
  */
-function install(name, algorithm) {
+Upash.prototype.install = function(name, algorithm) {
   if (typeof name !== 'string' || name === '') {
     throw new TypeError('The algorithm name must be an non-empty string.');
   }
@@ -46,23 +55,23 @@ function install(name, algorithm) {
     );
   }
 
-  if (funcs[name] !== undefined) {
+  if (this.funcs[name] !== undefined) {
     throw new TypeError(`The ${name} algorithm is already installed.`);
   }
 
   const idfs = algorithm.identifiers();
-  for (const an of queue) {
-    if (funcs[an].identifiers().some(idf => idfs.indexOf(idf) !== -1)) {
+  for (const an of this.queue) {
+    if (this.funcs[an].identifiers().some(idf => idfs.indexOf(idf) !== -1)) {
       throw new Error(
         'The identifiers property of the algorithm object clashes with the ones of another algorithm.'
       );
     }
   }
 
-  funcs[name] = Object.assign({}, algorithm);
-  Object.freeze(funcs[name]);
-  queue.push(name);
-}
+  this.funcs[name] = Object.assign({}, algorithm);
+  Object.freeze(this.funcs[name]);
+  this.queue.push(name);
+};
 
 /**
  * Uninstalls a password hashing function previously installed.
@@ -70,20 +79,20 @@ function install(name, algorithm) {
  * @param {string} name The name of the algorithm to uninstall or 'last' to
  * uninstall the last one installed.
  */
-function uninstall(name) {
+Upash.prototype.uninstall = function(name) {
   if (typeof name !== 'string' || name === '') {
     throw new TypeError('The algorithm name must be an non-empty string.');
   }
 
-  const hashFunc = funcs[name];
+  const hashFunc = this.funcs[name];
 
   if (!hashFunc) {
     throw new TypeError(`The ${name} algorithm is not installed`);
   }
 
-  delete funcs[name];
-  queue.splice(queue.indexOf(name), 1);
-}
+  delete this.funcs[name];
+  this.queue.splice(this.queue.indexOf(name), 1);
+};
 
 /**
  * Gets the list of the installed password hashing functions.
@@ -91,9 +100,9 @@ function uninstall(name) {
  * @return {string[]} The array of the available password hashing
  * functions.
  */
-function list() {
-  return queue.slice(0);
-}
+Upash.prototype.list = function() {
+  return this.queue.slice(0);
+};
 
 /**
  * Selects manually which password hashing function to use.
@@ -102,24 +111,24 @@ function list() {
  * @param {string|undefined} name The name of the algorithm to use.
  * @return {Object} The password hashing function object.
  */
-function use(name) {
+Upash.prototype.use = function(name) {
   if (name === undefined) {
-    if (queue.length === 0) {
+    if (this.queue.length === 0 || !this.default) {
       throw new Error('No algorithm installed.');
     }
-    name = queue[queue.length - 1];
+    name = this.default;
   } else if (typeof name !== 'string' || name === '') {
     throw new TypeError('The algorithm name must be an non-empty string.');
   }
 
-  const hashFunc = funcs[name];
+  const hashFunc = this.funcs[name];
 
   if (!hashFunc) {
     throw new TypeError(`The ${name} algorithm is not installed`);
   }
 
   return hashFunc;
-}
+};
 
 /**
  * Returns the name of the algorithm that has generated the hash string.
@@ -127,7 +136,7 @@ function use(name) {
  * @param {string} hashstr Secure hash string generated from this package.
  * @return {string|null} The name of password hashing algorithm.
  */
-function which(hashstr) {
+Upash.prototype.which = function(hashstr) {
   if (typeof hashstr !== 'string' || hashstr === '') {
     throw new TypeError('The hashstr param must be an non-empty string.');
   }
@@ -140,16 +149,16 @@ function which(hashstr) {
   }
   const idf = fields[1];
 
-  if (queue.length === 0) {
+  if (this.queue.length === 0) {
     throw new Error('No algorithm installed.');
   }
 
-  for (const name of queue) {
-    if (funcs[name].identifiers().indexOf(idf) === -1) continue;
+  for (const name of this.queue) {
+    if (this.funcs[name].identifiers().indexOf(idf) === -1) continue;
     return name;
   }
   return null;
-}
+};
 
 /**
  * Determines whether or not the hash provided matches the hash generated for
@@ -161,15 +170,15 @@ function which(hashstr) {
  * @returns {Promise.<boolean>} A boolean that is true if the hash computed
  * for the password matches.
  */
-function verify(hashstr, password) {
-  const name = which(hashstr);
+Upash.prototype.verify = function(hashstr, password) {
+  const name = this.which(hashstr);
 
   if (name === null) {
     throw new TypeError('No compatible algorithm installed.');
   }
 
-  return use(name).verify(hashstr, password);
-}
+  return this.use(name).verify(hashstr, password);
+};
 
 /**
  * Computes the hash string of the given password using the 'last' algorithm
@@ -180,17 +189,8 @@ function verify(hashstr, password) {
  * function. See the algorithm specific documentation for the options supported.
  * @returns {Promise.<string>} The generated secure hash string.
  */
-function hash(password, options) {
-  return use().hash(password, options);
-}
+Upash.prototype.hash = function(password, options) {
+  return this.use().hash(password, options);
+};
 
-module.exports = Object.freeze({
-  install,
-  uninstall,
-  list,
-  use,
-  which,
-
-  verify,
-  hash
-});
+module.exports = Upash;
