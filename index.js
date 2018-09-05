@@ -5,94 +5,60 @@ function Upash(algorithms, options) {
   this.queue = [];
   this.default = options && (options.default || null);
 
+  const install = (name, algorithm) => {
+    if (typeof name !== 'string' || name === '') {
+      throw new TypeError('The algorithm name must be an non-empty string.');
+    }
+    if (
+      typeof algorithm !== 'object' ||
+      algorithm === null ||
+      Array.isArray(algorithm)
+    ) {
+      throw new TypeError('The algorithm object must be an object.');
+    }
+
+    if (typeof algorithm.hash !== 'function') {
+      throw new TypeError(
+        'The hash property of the algorithm object should be a function.'
+      );
+    }
+
+    if (typeof algorithm.verify !== 'function') {
+      throw new TypeError(
+        'The verify property of the algorithm object should be a function.'
+      );
+    }
+
+    if (typeof algorithm.identifiers !== 'function') {
+      throw new TypeError(
+        'The identifiers property of the algorithm object should be a function.'
+      );
+    }
+
+    if (this.funcs[name] !== undefined) {
+      throw new TypeError(`The ${name} algorithm is already installed.`);
+    }
+
+    const idfs = algorithm.identifiers();
+    for (const an of this.queue) {
+      if (this.funcs[an].identifiers().some(idf => idfs.indexOf(idf) !== -1)) {
+        throw new Error(
+          'The identifiers property of the algorithm object clashes with the ones of another algorithm.'
+        );
+      }
+    }
+
+    this.funcs[name] = Object.assign({}, algorithm);
+    Object.freeze(this.funcs[name]);
+    this.queue.push(name);
+  };
+
   if (algorithms) {
     Object.keys(algorithms).forEach(current => {
-      this.install(current, algorithms[current]);
+      install(current, algorithms[current]);
     });
   }
 }
-
-/**
- * Installs a compatible password hashing function.
- * @public
- * @param {string} name The name of the password hashing function.
- * @param {Object} algorithm The password hashing function object.
- * @param {Function} algorithm.hash A function that takes a password and returns
- * a cryptographically secure password hash string.
- * @param {Function} algorithm.verify A function that takes a secure password
- * hash string and a password and returns whether or not the password is valid
- * for the given hash string.
- * @param {Function} algorithm.identifiers A function that returns the list of
- * identifiers that this password hashing algorithm is able to generate / verify.
- */
-Upash.prototype.install = function(name, algorithm) {
-  if (typeof name !== 'string' || name === '') {
-    throw new TypeError('The algorithm name must be an non-empty string.');
-  }
-  if (
-    typeof algorithm !== 'object' ||
-    algorithm === null ||
-    Array.isArray(algorithm)
-  ) {
-    throw new TypeError('The algorithm object must be an object.');
-  }
-
-  if (typeof algorithm.hash !== 'function') {
-    throw new TypeError(
-      'The hash property of the algorithm object should be a function.'
-    );
-  }
-
-  if (typeof algorithm.verify !== 'function') {
-    throw new TypeError(
-      'The verify property of the algorithm object should be a function.'
-    );
-  }
-
-  if (typeof algorithm.identifiers !== 'function') {
-    throw new TypeError(
-      'The identifiers property of the algorithm object should be a function.'
-    );
-  }
-
-  if (this.funcs[name] !== undefined) {
-    throw new TypeError(`The ${name} algorithm is already installed.`);
-  }
-
-  const idfs = algorithm.identifiers();
-  for (const an of this.queue) {
-    if (this.funcs[an].identifiers().some(idf => idfs.indexOf(idf) !== -1)) {
-      throw new Error(
-        'The identifiers property of the algorithm object clashes with the ones of another algorithm.'
-      );
-    }
-  }
-
-  this.funcs[name] = Object.assign({}, algorithm);
-  Object.freeze(this.funcs[name]);
-  this.queue.push(name);
-};
-
-/**
- * Uninstalls a password hashing function previously installed.
- * @public
- * @param {string} name The name of the algorithm to uninstall or 'last' to
- * uninstall the last one installed.
- */
-Upash.prototype.uninstall = function(name) {
-  if (typeof name !== 'string' || name === '') {
-    throw new TypeError('The algorithm name must be an non-empty string.');
-  }
-
-  const hashFunc = this.funcs[name];
-
-  if (!hashFunc) {
-    throw new TypeError(`The ${name} algorithm is not installed`);
-  }
-
-  delete this.funcs[name];
-  this.queue.splice(this.queue.indexOf(name), 1);
-};
 
 /**
  * Gets the list of the installed password hashing functions.
