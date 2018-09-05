@@ -93,6 +93,7 @@ Upash.prototype.use = function(name) {
     throw new TypeError(`The ${name} algorithm is not installed`);
   }
 
+  this.default = name;
   return hashFunc;
 };
 
